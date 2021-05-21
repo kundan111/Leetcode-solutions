@@ -23,7 +23,11 @@ public:
             return sum + root->val + rangeSumBSTUtil(root->left,low,high,sum) + rangeSumBSTUtil(root->right,low,high,sum);
             
         }else{
-            return rangeSumBSTUtil(root->left,low,high,sum) + rangeSumBSTUtil(root->right,low,high,sum);
+            if(root->val < low)
+                return rangeSumBSTUtil(root->right,low,high,sum);
+            else
+                return rangeSumBSTUtil(root->left,low,high,sum);
+            
         }
             
     }
