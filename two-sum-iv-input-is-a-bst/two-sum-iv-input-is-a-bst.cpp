@@ -9,36 +9,36 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
         unordered_map<int,int> m;
+        bool res = false;
         if(!root)
             return false;
         
-        preOrder(root,m);
+        preOrder(root,m, k,res);
         
-        for(auto i = m.begin(); i != m.end(); i++)
-        {
-            int cur = i->first;
-            if(m.find(k-cur) != m.end() && m.find(k-cur) != i)
-            {
-                return true;
-            }
-        }
-        
-        return false;
+        return res;
     }
     
-    void preOrder(TreeNode* root,unordered_map<int,int> &m)
+    void preOrder(TreeNode* root,unordered_map<int,int> &m, int k, bool &res)
     {
         if(root)
         {
-            
-            
             m[root->val]++;
-            preOrder(root->left,m);
-            preOrder(root->right,m);
+            
+            if(( k - root->val != root->val  && m.find(k-(root->val)) != m.end()) || (k - root->val == root->val &&  m[root->val] > 1))
+            {
+                res = true;
+                return;
+            }
+            
+            preOrder(root->left,m,k,res);    
+            
+            preOrder(root->right,m,k,res);    
+            
         }
     }
     
