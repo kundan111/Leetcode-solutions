@@ -20,8 +20,7 @@ class Solution {
 public:
     int result = 0;
     int findTilt(TreeNode* root) {
-        if(!root)
-            return 0;
+        
         
         subTreeSum(root);
         
