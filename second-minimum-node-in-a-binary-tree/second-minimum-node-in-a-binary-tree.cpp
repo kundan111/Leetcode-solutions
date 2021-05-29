@@ -14,7 +14,6 @@ public:
     map <int,int> m;
     int findSecondMinimumValue(TreeNode* root) {
         inorder(root);
-        // sort(v.begin(),v.end());
         
         if(m.rbegin()->first == m.begin()->first)
         {
