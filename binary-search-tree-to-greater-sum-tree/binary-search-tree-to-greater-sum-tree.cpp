@@ -13,17 +13,35 @@ class Solution {
 public:
     int s = 0;
     TreeNode* bstToGst(TreeNode* root) {
+        
+//         ios::sync_with_stdio(false);
+//         cin.tie(nullptr);
+//         cout.tie(nullptr);
        
+//         if(root->right)
+//             bstToGst(root->right);
+        
+//         s = root->val = s + root->val;
+        
+//         if(root->left)
+//             bstToGst(root->left);
+        
+        func(root);
+       
+        
+      return root;
+    }
+    
+    void func(TreeNode* root)
+    {
         if(root->right)
-            bstToGst(root->right);
+            func(root->right);
         
         s = root->val = s + root->val;
         
         if(root->left)
-            bstToGst(root->left);
-       
+            func(root->left);
         
-      return root;
     }
     
     
