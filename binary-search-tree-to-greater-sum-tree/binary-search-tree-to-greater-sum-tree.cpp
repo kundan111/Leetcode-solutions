@@ -14,17 +14,11 @@ public:
     int s = 0;
     TreeNode* bstToGst(TreeNode* root) {
         
-//         ios::sync_with_stdio(false);
-//         cin.tie(nullptr);
-//         cout.tie(nullptr);
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
        
-//         if(root->right)
-//             bstToGst(root->right);
-        
-//         s = root->val = s + root->val;
-        
-//         if(root->left)
-//             bstToGst(root->left);
+
         
         func(root);
        
