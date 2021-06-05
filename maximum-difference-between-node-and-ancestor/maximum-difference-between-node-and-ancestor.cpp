@@ -12,8 +12,10 @@
 class Solution {
 public:
     int maxAncestorDiff(TreeNode* root) {
-    
-          int res = 0;
+        
+        ios::sync_with_stdio(false);
+        
+        int res = 0;
         helper(root,root->val,root->val,res);
         
         return res;
