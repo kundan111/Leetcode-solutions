@@ -11,22 +11,34 @@
  */
 class Solution {
 public:
-    int c = 0;
+    
     int countNodes(TreeNode* root) {
-        counter(root);
-        
-        return c;
-    }
-    
-    
-    void counter(TreeNode* root)
-    {
         if(!root)
-            return;
-        c++;
-        counter(root->left);
-        counter(root->right);
+            return 0;
+        int l =0;
+        int r = 0;
+        
+        TreeNode* lRoot = root;
+        TreeNode* rRoot = root;
+        while(lRoot)
+        {
+            l++;
+            lRoot = lRoot->left;
+            
+        }
+        
+        while(rRoot)
+        {
+            r++;
+            rRoot = rRoot->right;
+        }
+        
+        if(l == r)
+        {
+            return pow(2,l) - 1;
+        }
+        
+        return 1 + countNodes(root->left) + countNodes(root->right);
     }
-    
     
 };
