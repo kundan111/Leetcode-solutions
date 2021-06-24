@@ -1,6 +1,9 @@
 class Solution {
 public:
     bool canThreePartsEqualSum(vector<int>& arr) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
        
         int arr_sum = accumulate(arr.begin(),arr.end(),0);
         int sz = arr.size();
@@ -12,13 +15,13 @@ public:
         int count = 0;
         
          for (int num : arr) {
+             if(count == 2)
+                 return true;
             part += num;
             if (part == perPartSum) {
                 part = 0;
                 count++;
-                if (count == 3) {
-                    return true;
-                }
+                
             }
         }
         
