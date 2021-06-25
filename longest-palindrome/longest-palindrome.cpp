@@ -1,23 +1,15 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        unordered_map<char,int>m;
-        for(auto i: s)
-        {
-            m[i]++;
-        }
         
-        // count number of odd counts 
         int oddCount = 0;
-        for(auto i = m.begin(); i != m.end(); i++)
+        int sz = s.size();
+        for(auto i = 'A'; i <= 'z'; i++)
         {
-            if(i->second & 1)
-            {
-                oddCount++;
-            }
+            oddCount += count(s.begin(),s.end(),i) & 1;
         }
         
-        return oddCount == 0 ? s.size() : s.size() - (oddCount - 1);
+        return oddCount == 0 ? s.size() : s.size() - oddCount + 1;
     
     }
 };
