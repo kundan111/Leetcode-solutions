@@ -1,28 +1,37 @@
 class Solution {
 public:
     int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
-        sort(boxTypes.begin(),boxTypes.end(),comparator);
-        int curBoxes = 0;
-        int i = 0;
-        int res = 0;
-        while(i < boxTypes.size() && curBoxes < truckSize)
+        // counting sort
+        vector<int> vec(1001,-1);
+        
+        for(auto cur: boxTypes)
         {
-            while(i < boxTypes.size() && boxTypes[i][0] > 0 && curBoxes < truckSize)
+            if(vec[cur[1]] == -1)
             {
-                  curBoxes = curBoxes +  1;
-                  res  = res + boxTypes[i][1];
-                  boxTypes[i][0] = boxTypes[i][0] - 1;
+                vec[cur[1]] = cur[0];
                 
+            }else{
+                vec[cur[1]] += cur[0];
             }
-            i++;
         }
         
+        int curSize = truckSize;
+        int res = 0;
+        for( int i = 1000; i >= 0; i--)
+        {
+            if(vec[i] == -1)
+                continue;
+            if(curSize < vec[i])
+            {
+                res =  res + curSize*i;
+                return res;
+            }else{
+                res = res + i*vec[i];
+                curSize = curSize - vec[i];
+            }
+        }
         
         return res;
         
-    }
-    static bool comparator(vector<int>a,vector<int>b)
-    {
-        return a[1] > b[1];
     }
 };
