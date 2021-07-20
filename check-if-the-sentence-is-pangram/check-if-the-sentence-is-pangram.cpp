@@ -6,7 +6,7 @@ public:
         int sz = sentence.size();
         while( i < sz)
         {
-            s[sentence[i] - 'a'] = 1;
+            s |= (1 << sentence[i] - 'a');
             i++;
         }
         return s.all();
