@@ -1,47 +1,23 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
+        if(nums.size() <= 1)
+            return nums.size();
+        
         int sz = nums.size();
-        vector<int> unique_array;
-
         int i = 0;
-        int uniq_count = 0;
-
-        if(sz > 0)
+        int j = 1;
+        
+        while(j < sz)
         {
-            unique_array.push_back(nums[0]);
-        }
-
-        while(i < sz)
-        {
-            // pick the cur element
-            int cur = nums[i];
-
-            //now check its occurence again in further indexes
-            int j = i;
-            while(j < sz)
+            if(nums[i] != nums[j])
             {
-                if(cur == nums[j])
-                {
-                    j++;
-                }else{
-                    unique_array.push_back(nums[j]);
-                    break;
-                }
+                i = i+1;
+                nums[i] = nums[j];
             }
-
-            uniq_count += 1;
-
-            i = j;
-
-        }
-
-        for(int i = 0; i < uniq_count; i++)
-        {
-            nums[i] = unique_array[i];
+            j++;
         }
         
-        return uniq_count;
-            
+        return i+1;
     }
 };
