@@ -1,29 +1,22 @@
 class Solution {
 public:
-    int minDeletionSize(vector<string>& strs) {
-        int sz = strs.size();
-        int res = 0;
-        int i = 1;
+    int minDeletionSize(vector<string>& strs,int res=0) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         int wordSize = strs[0].size();
-        vector<int> temp(wordSize,0);
-        while( i < sz)
+        int vecSize = strs.size();
+        for(int i = 0; i < wordSize; i++)
         {
-            string cur = strs[i];
-            string prev = strs[i-1];
-            int j = 0;
-            
-            while( j < wordSize)
+            for(int j = 1; j < vecSize; j++)
             {
-                if((prev[j] - 'a' > cur[j] -'a') && !temp[j])
+                if(strs[j-1][i] > strs[j][i])
                 {
                     res++;
-                    temp[j] = 1; 
+                    break;
                 }
-                j++;
             }
-            i++;
         }
-        
         return res;
     }
 };
