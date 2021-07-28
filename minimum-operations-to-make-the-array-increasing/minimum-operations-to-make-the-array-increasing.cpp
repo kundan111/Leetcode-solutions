@@ -2,7 +2,9 @@ class Solution {
 public:
     int res = 0;
     int minOperations(vector<int>& nums) {
-       
+       ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
        int cur = nums[0] ;
        int sz = nums.size();
         
@@ -11,8 +13,8 @@ public:
            if(nums[i] <= cur)
            {
                res += (cur+1 - nums[i]);
-               nums[i] = cur+1;
-               cur = nums[i];
+               
+               cur = cur+1;
            }else{
                cur = nums[i];
            }
