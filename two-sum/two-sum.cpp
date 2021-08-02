@@ -1,37 +1,37 @@
-bool comp(pair<int,int> a, pair<int,int> b)
-    {
-        if(a.first < b.first)   
-            return true;
-        return false;
-    }
 class Solution {
 public:
-    
-    vector<int> twoSum(vector<int>& vec, int t) {
-        
-        int n =  vec.size();
-        vector <pair<int,int> >newArr(n);
-        for(int i = 0; i < n;i++)
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,pair<int,vector<int> > > m;
+        int sz = nums.size();
+        for(int i = 0; i < sz; i++)
         {
-            newArr[i].first = vec[i];
-            newArr[i].second = i;
-        }
-        int f = 0; int s = n-1;
-        sort(newArr.begin(),newArr.end(), comp);
-        while(f<s)
-        {
-            if(newArr[f].first+newArr[s].first == t)
-                break;
-            else if(newArr[f].first+newArr[s].first > t)
-                s--;
-            else
-                f++;
+            int val = nums[i];
+            m[val].first++;
+            m[val].second.push_back(i);
         }
         
-        vector<int>res;
-        res.push_back(newArr[f].second);
-        res.push_back(newArr[s].second);
         
-        return res;
+        for(auto i = m.begin(); i != m.end(); i++)
+        {
+            int cur = i->first;
+            int searchFor = target - cur;
+            
+            auto s = m.find(searchFor);
+            
+            if(s != m.end() && s != i && s->second.first > 0)
+            {
+                return vector<int> {i->second.second[0],s->second.second[0]};
+            }
+            
+            if(s != m.end() && s == i && s->second.first > 1)
+            {
+                return vector<int> {i->second.second[0],s->second.second[1]};
+            }
+            
+            
+        }
+        
+        return vector<int>{};
     }
+    
 };
