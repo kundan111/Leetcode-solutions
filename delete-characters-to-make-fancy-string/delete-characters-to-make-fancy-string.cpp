@@ -2,25 +2,42 @@ class Solution {
 public:
     string makeFancyString(string s) {
         int sz = s.size();
-        int j =1;
+        int i = 0;
         
-        int cnt = 1;
+        string res = "";
         
-        for(int i = 1; i < sz; i++)
+        while( i < sz)
         {
+            char c = s[i];
+            int j = i;
             
-            cnt = s[i] == s[i-1] ? cnt+1 : 1;
-            if(cnt < 3)
-                
+            int count = 0;
+            
+            while(j < sz && s[j] == c)
             {
-                s[j++] = s[i];
+                j++;
+                count++;
             }
+            
+            
+            if(count >= 3)
+            {
+                // res = res + c + c;
+                res.push_back(c);
+                res.push_back(c);
+            }else{
+                while(count)
+                {
+                    // res = res + c;
+                    
+                    res.push_back(c);
+                    count--;
+                }
+                
+            }
+            i = j;
         }
         
-        
-        s.resize(j);
-        
-        
-        return s;
+        return res;
     }
 };
