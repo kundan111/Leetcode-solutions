@@ -15,6 +15,10 @@ public:
         
         int carry = 0;
         string res = "";
+        
+        int l = sz1 >= sz2 ? sz1 : sz2;
+        res.resize(l);
+        int r = l-1;
         while( i >=0  && j >= 0)
         {
             char curf = num1[i];
@@ -23,7 +27,8 @@ public:
             int s = ((curf - '0') + (curs - '0')) + carry;
             int newDigit = s%10;
             
-            res.insert(res.begin(),(char)(newDigit + 48));
+            // res.insert(res.begin(),(char)(newDigit + 48));
+            res[r] = (char)(newDigit + 48);
             
             if(s > 9)
             {
@@ -33,6 +38,7 @@ public:
             }
             i--;
             j--;
+            r--;
         }
         
         if(i < 0 && j < 0)
@@ -61,7 +67,8 @@ public:
         while(remaining >= 0)
         {
             int sum = ((longer[remaining] - '0') + carry);
-            res.insert(res.begin(),(char)(48 + (sum%10)));
+            // res.insert(res.begin(),(char)(48 + (sum%10)));
+            res[r] = (char)(48 + (sum%10));
             if(sum > 9)
             {
                 carry = 1;
@@ -69,6 +76,7 @@ public:
                 carry = 0;
             }
             remaining--;
+            r--;
         }
         
         if(carry)
