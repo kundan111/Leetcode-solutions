@@ -5,7 +5,8 @@ public:
         int col = m[0].size();
         
         
-        set<int> zero_row,zero_col;
+        vector<int>row_zero(row,1);
+        vector<int>col_zero(col,1);
         
         for(int i = 0; i < row;i++)
         {
@@ -13,27 +14,24 @@ public:
             {
                 if(m[i][j] == 0)
                 {
-                    zero_row.insert(i);
-                    zero_col.insert(j);
+                    row_zero[i] = 0;
+                    col_zero[j] = 0;
                 }
             }
         }
         
-        
-        for(auto &pr: zero_row)
+       for(int i = 0; i < row;i++)
         {
-            for(int i =0 ; i < col ; i++)
+           
+            for(int j = 0; j < col; j++)
             {
-                m[pr][i] = 0;
+                if(row_zero[i] == 0 || col_zero[j] == 0)
+                {
+                    m[i][j] =0;
+                    
+                }
             }
         }
         
-        for(auto &pr: zero_col)
-        {
-             for(int i =0 ; i < row ; i++)
-            {
-                m[i][pr] = 0;
-            }
-        }
     }
 };
