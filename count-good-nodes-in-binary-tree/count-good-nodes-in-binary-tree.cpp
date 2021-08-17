@@ -11,31 +11,30 @@
  */
 class Solution {
 public:
+    int res = 0;
     int goodNodes(TreeNode* root) {
-        
-        int maxUntilNow = root->val;
-        int res = 0;
-        helper(root,maxUntilNow,res);
-        
+        count(root,root->val);
         return res;
     }
     
-    void helper(TreeNode* root, int maxUntilNow, int &res)
+    void count(TreeNode* root, int val)
     {
-        if(root->val >= maxUntilNow)
+        if(!root)
+            
+            return;
+        if(root->val >= val)
         {
             res++;
-            maxUntilNow = root->val;
         }
-        
         if(root->left)
         {
-            helper(root->left,maxUntilNow,res);
+            count(root->left,max(val,root->left->val));    
         }
-        
         if(root->right)
         {
-            helper(root->right,maxUntilNow,res);
+            count(root->right,max(val,root->right->val));    
         }
+        
+        
     }
 };
