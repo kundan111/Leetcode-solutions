@@ -1,6 +1,7 @@
 class Solution {
 public:
-    static vector<int> v;
+    static vector<int>v;
+    
     
     int getKth(int lo, int hi, int k) {
         
@@ -10,14 +11,14 @@ public:
         int sz = hi-lo+1;
         vector<int> res(sz);
         
-        std::iota(res.begin(), res.end(), lo);
+        iota(res.begin(), res.end(), lo);
         
         
         
        
-       std::nth_element(res.begin(),res.begin()+k-1,res.end(),comp) ;
+       nth_element(res.begin(),res.begin()+k-1,res.end(),comp) ;
         
-        return *(res.begin()+k-1);
+        return res[k-1];
         
         
     }
@@ -31,11 +32,7 @@ public:
     
     static int compute(int val)
     {
-        
-        if(v[val] != -1)
-            return v[val];
-        
-        
+       
         
         if(val == 1)
             return 0;
@@ -47,10 +44,11 @@ public:
             cal = compute(val/2); 
         }
         
-        return v[val] = 1 + cal;
+        return 1 + cal;
         
     }
     
 };
 
-vector<int>Solution::v(1000001,-1);
+
+
