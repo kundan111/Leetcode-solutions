@@ -1,36 +1,25 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
+        if(x == 0)
+            return 1;
         
-        // Any -ve number can not be palindrome
-        // numbers from [0-9] will always be palindrome
-        
-        //1. exclude -ve numbers
-        
-        int original = x; 
-        if(x < 0)
+        if( x < 0 || x % 10 == 0)
         {
-            // number is negetive
-            return  false;
+            return 0;
         }
         
-        if(0 <=  x && x < 10)
-        {
-            // single digit
-            return true;
-        }
+        long long int rev = 0;
+        int copy = x;
         
-        // make reversed ll because reversed can be larger than original number x
-        long long int reversed = 0;
         while(x)
         {
-            int rem = x%10;
-            reversed = reversed*10 + rem;
+            int last = x%10;
+            rev = rev*10 + last;
             x = x/10;
         }
         
-        
-        return reversed == original;
+        return rev == copy;
         
         
     }
