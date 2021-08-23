@@ -24,16 +24,16 @@ public:
                 s_final += c;
                 i++;
             }else{
-                int j = i;
-                while(j < sz && s[j] == '#')
+                
+                while(i < sz && s[i] == '#')
                 {
                     if(s_final.size())
                     {
                         s_final.pop_back();
                     }
-                    j++;
+                    i++;
                 }
-                i = j;
+                
             }
             
             
