@@ -1,18 +1,27 @@
 class Solution {
 public:
     bool judgeSquareSum(int c) {
-        for(long long int i = 0; i*i <= c; i++)
+        
+        long long int l = 0;
+        int r = sqrt(c);
+        
+        while(l <= r)
         {
-            if(isSquare(c - (long long)i*i))
+            long long int cur = l*l + (long long int)r*r;
+            if(c < cur)
+            {
+                r--;
+            }else if(c > cur)
+            {
+                l++;
+            }else{
                 return true;
+            }
         }
+        
         return false;
     }
     
-    bool isSquare(long long int n)
-    {
-        
-        return ceil((double)sqrt(n)) == floor((double)sqrt(n));
-    }
+    
     
 };
