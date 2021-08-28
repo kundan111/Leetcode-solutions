@@ -7,17 +7,18 @@ public:
         {
             vec[v1]++;
         }
-        set<int> s;
+        vector<int> res;
         for(int v2: nums2)
         {
             if(vec[v2] > 0)
             {
-                s.insert(v2);
-                vec[v2]--;
+                res.push_back(v2);
+                vec[v2] = 0;
             }
         }
         
-        vector<int> res(s.begin(),s.end());
+        
+        // vector<int> res(s.begin(),s.end());
         
         
         return res;
