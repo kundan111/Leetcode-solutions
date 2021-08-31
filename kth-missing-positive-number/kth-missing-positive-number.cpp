@@ -1,12 +1,24 @@
 class Solution {
 public:
     int findKthPositive(vector<int>& arr, int k) {
-    for (int n = 1, i = 0; n <= 1000; ++n) {
-        if (i < arr.size() && arr[i] == n)
-            ++i;
-        else if (--k == 0)
-            return n;
+        int sz  = arr.size();
+        int n = 1;
+        for(int i = 0; i < sz; )
+        {
+            if(arr[i] == n)
+            {
+                i++;
+            }else{
+                k--;
+                if(k == 0)
+                {
+                    return n;
+                }
+            }
+            n++;
+            cout << "n: "  << n << " k: " << k << endl;
+        }
+        return --n + k;
+        
     }
-    return 1000 + k;
-}
 };
