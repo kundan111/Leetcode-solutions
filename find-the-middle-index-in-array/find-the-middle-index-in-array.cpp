@@ -1,22 +1,29 @@
 class Solution {
 public:
     int findMiddleIndex(vector<int>& nums) {
-        int totalSum = accumulate(nums.begin(),nums.end(),0);
-        int leftSum = 0;
-        
         int sz = nums.size();
-            
-        for(int i =0 ; i < sz; i++)
+        vector<int> Sum(sz);
+        
+        int tempLeft = 0;
+        int tempRight = 0;
+        for(int i = 0; i < sz; i++)
         {
-            totalSum -= nums[i];
-            if(leftSum == totalSum)
+            Sum[i] = tempLeft + nums[i];
+            tempLeft = tempLeft + nums[i];
+        }
+        tempLeft = 0;
+        int ans = INT_MAX;
+        for(int i = sz - 1; i >= 0; i--)
+        {
+            Sum[i] -= nums[i]+tempLeft;
+            if(Sum[i] == 0)
             {
-                return i;
+                ans = min(ans,i);
             }
-            leftSum += nums[i];
-            
+            tempLeft += nums[i];
         }
         
-        return -1;
+        
+        return ans == INT_MAX ? -1 : ans;
     }
 };
