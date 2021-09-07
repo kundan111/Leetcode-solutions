@@ -52,19 +52,11 @@ public:
         }
         // node is unlocked
         
-        bool b2 = areAllAncestorsUnlocked(num);
         
-        if(!b2)
+        
+        if( areAllAncestorsUnlocked(num) && checkAndUnlockDecendents(num))
         {
-            return false;
-        }
-        
-        
-        bool b1 = checkAndUnlockDecendents(num);
-        
-        
-        if( b1 && b2)
-        {
+            
             // lock it
             lock_state[num] = user;
             return true;
