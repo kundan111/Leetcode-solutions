@@ -3,10 +3,10 @@ public:
     long long minimumPerimeter(long long neededApples) {
         long long int myApples = 0;
         int start = 0;
-        while(neededApples >0)
+        while(myApples < neededApples)
         {
             start++;
-            neededApples -= applesInPermiter(start);
+            myApples += applesInPermiter(start);
             
         }
         
