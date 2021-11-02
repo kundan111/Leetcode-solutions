@@ -2,30 +2,32 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         
+        
+         
+        unordered_map<int,int> m;
+        for(int &val : nums )
+        {
+            m[val]++;
+        }
+        
+        
+        int start = 1;
+        
+        while(true)
+        {
+            if(m.count(start) == 0)
+            {
+                return start;
+            }
+            start++;
+        }
+        
+        return -1;
+        
+        /*
         sort(nums.begin(),nums.end());
         int sz = nums.size();
         int i = 0;
-        
-        
-//         if(sz == 1)
-//         {
-//             if (nums[0] <= 0)
-//             {
-//                 return 1;
-                
-//             }else{
-//                 if(nums[0] == 1)
-//                 {
-//                     return 2;
-//                 }else{
-//                     return 1;
-//                 }
-//             }
-//         }
-        
-        
-        // cout << "yo1" << endl;
-        
         
         int start = 1;
         while( i < sz)
@@ -49,11 +51,13 @@ public:
             }
             
             start += 1;
-            // cout << "yo2" << endl;
+            
         
         }
         
         return start;
+        
+        */
         
     }
 };
