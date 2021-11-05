@@ -11,55 +11,20 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+ 
         
-        ListNode* sorting;
+// till sorting pointer values are sorted..
         
-        if(l1 == NULL)
-        {
-            return l2;
-        }
-        if(l2 == NULL)
-        {
+        if (NULL == l1) return l2;
+        else if (NULL == l2) return l1;
+        if (l1->val <= l2->val) {
+            l1->next = mergeTwoLists(l1->next, l2);
             return l1;
         }
-        
-        if(l1->val <= l2->val)
-        {
-            sorting = l1;
-            l1 = sorting->next;
-        }else{
-            sorting = l2;
-            l2 = sorting->next;
+        else {
+            l2->next = mergeTwoLists(l1, l2->next);
+            return l2;
         }
-        
-        ListNode* mergedHead = sorting;
-        
-        while(l1 && l2)
-        {
-            if(l1->val <= l2->val)
-            {
-                sorting->next = l1;
-                sorting = l1;
-                l1 = sorting->next;
-            }else{
-                sorting->next = l2;
-                sorting = l2;
-                l2 = sorting->next;
-            }
-        }
-        
-        
-        if(l1 == NULL)
-        {
-            sorting->next = l2;
-        }
-        
-        if(l2 == NULL)
-        {
-            sorting->next = l1;
-        }
-        
-        return mergedHead;
         
         
         
