@@ -1,37 +1,35 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,pair<int,vector<int> > > m;
-        int sz = nums.size();
-        for(int i = 0; i < sz; i++)
+        
+        unordered_map<int,vector<int>> m;
+        int numSz = nums.size();
+        for(int i = 0; i < numSz; i++)
         {
-            int val = nums[i];
-            m[val].first++;
-            m[val].second.push_back(i);
+            m[nums[i]].push_back(i);
         }
-        
-        
-        for(auto i = m.begin(); i != m.end(); i++)
+
+        auto itr = m.begin();
+        for(; itr != m.end(); itr++)
         {
-            int cur = i->first;
-            int searchFor = target - cur;
-            
-            auto s = m.find(searchFor);
-            
-            if(s != m.end() && s != i && s->second.first > 0)
-            {
-                return vector<int> {i->second.second[0],s->second.second[0]};
-            }
-            
-            if(s != m.end() && s == i && s->second.first > 1)
-            {
-                return vector<int> {i->second.second[0],s->second.second[1]};
-            }
-            
-            
+             auto searchItr = m.find(target - itr->first);
+             if( searchItr != m.end())
+             {
+                 if( searchItr != itr)
+                 {	
+                     return {itr->second[0], searchItr->second[0]};
+                 }else{
+                     if(itr->second.size() > 1)
+                    {
+                       return {itr->second[0], itr->second[1]};
+                    }
+                }
+             }
+
         }
-        
-        return vector<int>{};
+
+        return {};
+
     }
     
 };
