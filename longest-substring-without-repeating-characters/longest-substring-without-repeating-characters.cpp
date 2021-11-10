@@ -1,35 +1,28 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int sz = s.size();
-        int l = 0;
-        int r = 0;
-        int res = 0;
         
-        vector<bool> already(256,false);
-        int len = 0;
-        while( r < sz )
+        vector<int>tracker(128,-1);
+        int left = 0;
+        int right = 0;
+        
+        int sz = s.size();
+        
+        int res = 0;
+        while(right < sz)
         {
-            while(r < sz && !already[(int)s[r]])
+            char curChar = s[right];
+            int indx = tracker[(int)curChar];
+            
+            
+            if(indx != -1 && indx >= left && indx < right)
             {
-                already[(int)s[r]] = true;
-                r++;
-                len++;
+                left = indx + 1;
             }
             
-            // cout << "len1: " << len << endl;
-            
-            
-            res = max(res,len);
-            
-            while( l < r && already[(int)s[r]])
-            {
-                
-                already[(int)s[l]] = false;
-                l++;
-                len--;
-            }
-            // cout << "len2: " << len << endl << endl;
+            res = max(res, right-left+1);
+            tracker[(int)curChar] = right;
+            right++;
         }
         return res;
     }
