@@ -22,14 +22,14 @@ public:
             
             res = max(res,len);
             
-            while( r < sz && already[(int)s[r]])
+            while( l < r && already[(int)s[r]])
             {
                 
                 already[(int)s[l]] = false;
                 l++;
                 len--;
             }
-            // cout << "len2: " << len << endl;
+            // cout << "len2: " << len << endl << endl;
         }
         return res;
     }
