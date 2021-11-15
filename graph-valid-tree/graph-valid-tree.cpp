@@ -1,39 +1,43 @@
 class UnionFind{
 private:
     vector<int>root;
+    vector<int> rank;
+    int count;
 public:
-    UnionFind(int sz)
-    {
-        root.resize(sz);
-        for(int i = 0; i < sz; i++)
-        {
+    UnionFind(int sz): root(sz), rank(sz),count(sz) {
+        
+        for (int i = 0; i < sz; i++) {
             root[i] = i;
+            rank[i] = 1;
         }
     }
-    
-    int find(int x)
-    {
-        return root[x];
+    int find(int x) {
+        if (x == root[x]) {
+            return x;
+        }
+        return root[x] = find(root[x]);
     }
     
     bool unionSet(int x, int y)
     {
         int rootX = find(x);
         int rootY = find(y);
-        
-        if(rootX != rootY)
-        {
-            for(int i  = 0; i < root.size(); i++)
-            {
-                if(root[i] == rootY)
-                {
-                    root[i] = rootX;
-                }
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) {
+                root[rootY] = rootX;
+            } else if (rank[rootX] < rank[rootY]) {
+                root[rootX] = rootY;
+            } else {
+                root[rootY] = rootX;
+                rank[rootX] += 1;
             }
+            
+            count--;
             return true;
+            
+        }else{
+            return false;
         }
-        // cout << "yo" << endl;
-        return false;
     }
     
     bool isConnected(int x, int y)
@@ -59,13 +63,16 @@ public:
         {
             if(root[i] != val)
             {
-                // cout << "ghoda" << endl;
                 return false;
             }
         }
         return true;
     }
     
+    int getCount()
+    {
+        return count;
+    }
     
     
 };
@@ -80,33 +87,15 @@ public:
         {
             if(!uf.unionSet(edges[i][0],edges[i][1]))
             {
+                
                 return false;   
             }
         }
         
-        if(uf.checkForConnectdness())
-        {
-            return true;
-        }
+        // cout << "uf.getCount(): " << uf.getCount() << endl;
         
-        return false;
+        return uf.getCount() == 1;
     }
     
-    
-    /*void dfs(vector<vector<int>>& edges,int vertex, vector<int,int> curEdge)
-    {
-        if(v[vertex] == 0)
-        {
-            v[vertex]++;
-            for(int i = 0; i < edges.size(); i++)
-            {
-                if((edges[i] != curEdge) && (edges[i][0] == curEdge || edges[i][1] == curEdge ))
-                {
-                    
-                    dfs(edges, vertex,edges[i]);
-                }
-            }
-        }
-    }*/
     
 };
