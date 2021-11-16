@@ -1,101 +1,60 @@
-class UnionFind{
-private:
-    vector<int>root;
-    vector<int> rank;
-    int count;
-public:
-    UnionFind(int sz): root(sz), rank(sz),count(sz) {
-        
-        for (int i = 0; i < sz; i++) {
-            root[i] = i;
-            rank[i] = 1;
-        }
-    }
-    int find(int x) {
-        if (x == root[x]) {
-            return x;
-        }
-        return root[x] = find(root[x]);
-    }
-    
-    bool unionSet(int x, int y)
-    {
-        int rootX = find(x);
-        int rootY = find(y);
-        if (rootX != rootY) {
-            if (rank[rootX] > rank[rootY]) {
-                root[rootY] = rootX;
-            } else if (rank[rootX] < rank[rootY]) {
-                root[rootX] = rootY;
-            } else {
-                root[rootY] = rootX;
-                rank[rootX] += 1;
-            }
-            
-            count--;
-            return true;
-            
-        }else{
-            return false;
-        }
-    }
-    
-    bool isConnected(int x, int y)
-    {
-        return find(x) == find(y);
-    }
-    
-    void printIt()
-    {
-        cout << endl;
-        for(int i = 0; i < root.size(); i++)
-        {
-            cout << root[i] << " ";
-        }
-        cout << endl;
-    }
-    
-    bool checkForConnectdness()
-    {
-        
-        int val = root[0];
-        for(int i = 0; i < root.size(); i++)
-        {
-            if(root[i] != val)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    int getCount()
-    {
-        return count;
-    }
-    
-    
-};
 
 class Solution {
-
 public:
     bool validTree(int n, vector<vector<int>>& edges) {
-        
-        UnionFind uf(n);
-        for(int i= 0; i < edges.size(); i++)
-        {
-            if(!uf.unionSet(edges[i][0],edges[i][1]))
+            
+            vector<vector<int>> adjList(n);
+            for(auto v : edges)
             {
-                
-                return false;   
+                adjList[v[0]].push_back(v[1]);
+                adjList[v[1]].push_back(v[0]);
             }
+        
+            /*int i = 0;
+            for(auto v : adjList)
+            {
+                cout << i << " -> ";
+                for(int r : v)
+                {
+                    cout << r << " ";
+                }
+                cout << endl;
+                i++;
+            }
+        */
+        
+        vector<bool> visited(n,false);
+        if (hasCycle(adjList, 0, visited, -1))
+            return false;
+        
+        
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) 
+                return false;
         }
         
-        // cout << "uf.getCount(): " << uf.getCount() << endl;
+        return true;
+                
+    
+                
         
-        return uf.getCount() == 1;
     }
+    
+    bool hasCycle(vector<vector<int>> &adjList, int u, vector<bool> &visited, int parent) {
+        visited[u] = true;
+        
+        for (int i = 0; i < adjList[u].size(); i++) {
+            int v = adjList[u][i];
+            
+            if ((visited[v] && parent != v) || (!visited[v] && hasCycle(adjList, v, visited, u)))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    
+    
     
     
 };
