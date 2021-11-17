@@ -2,22 +2,42 @@ class Solution {
 public:
     int minFlipsMonoIncr(string s) {
         
-        int flipCount = 0;
-        int oneCount = 0;
+        int ans = 0;
+        int sz = s.size();
+        int totOnes = count(s.begin(),s.end(), '1');
+        ans = min(totOnes,sz-totOnes);
         
-        for(char c : s)
+        int oneCount = 0;
+        for(int i = 0; i < sz; i++)
         {
-            if(c == '1')
+            if(s[i] == '1')
             {
                 oneCount++;
-            }else{
-                flipCount++;
             }
             
-            flipCount = min(flipCount,oneCount);
+            
+            int zeroCountinLeftPart = (sz - i-1) - (totOnes - oneCount);
+            // cout << "zeroCountinLeftPart: " << zeroCountinLeftPart << endl;
+            
+            ans = min(ans,oneCount + zeroCountinLeftPart);
+            
+        }
+        return ans;
+    }
+    
+    int zeroCounter(string &s, int i)
+    {
+        int res = 0;
+        for(int j = i; j < s.size(); j++)
+        {
+            if(s[j] == '0')
+            {
+                res++;
+            }
         }
         
-        return flipCount;
         
+        return res;
+            
     }
 };
