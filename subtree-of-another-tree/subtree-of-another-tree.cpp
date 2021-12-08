@@ -12,30 +12,42 @@
 class Solution {
 public:
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        // Both the roots are not null, so not checking
-        if(root && subRoot)
+        
+        bool res = false;
+        preorder(root,subRoot,res);
+        return res;
+    }
+    
+    bool isSame(TreeNode* r1, TreeNode* r2)
+    {
+        if((r1 && !r2) || (r2 && !r1))
+        {
+            return false;
+        }
+        if(!r1 && !r2)
+        {
+            return true;
+        }
+        
+        return r1->val == r2->val && isSame(r1->left,r2->left) && isSame(r1->right,r2->right);
+    }
+    
+    void preorder(TreeNode* root, TreeNode* subRoot, bool &res)
+    {
+        if(root)
         {
             if(root->val == subRoot->val)
             {
-                return isSame(root,subRoot)  || isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
-            }else{
-                return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);    
+                if(!res)
+                {
+                    res = isSame(root,subRoot);    
+                }
             }
-            
-            
-            
-            
+            preorder(root->left,subRoot,res);
+            preorder(root->right,subRoot,res);
         }
-            
-        return false;
     }
     
-    bool isSame(TreeNode* root1, TreeNode* root2)
-    {
-        if(!root1 && !root2)
-            return true;
-        if((root1 && !root2) || (root2 && !root1))
-            return false;
-        return root1->val == root2->val && isSame(root1->left,root2->left) && isSame(root1->right,root2->right);
-    }
+    
+    
 };
