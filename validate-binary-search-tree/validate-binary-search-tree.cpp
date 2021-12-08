@@ -12,14 +12,15 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        
-        return BSTUtil(root,LLONG_MIN,LLONG_MAX);
+     
+        return isValidTreeUtil(root,LLONG_MIN,LLONG_MAX);
     }
     
-    bool BSTUtil(TreeNode* root, long long int mini,long long int maxi)
+    bool isValidTreeUtil(TreeNode* root, long long int mini, long long int maxi)
     {
         if(!root)
             return true;
-        return (mini < root->val && root->val < maxi) && BSTUtil(root->left,mini,root->val) && BSTUtil(root->right,root->val,maxi);
+        return (mini < root->val && root->val < maxi)  && isValidTreeUtil(root->left,mini,root->val) && isValidTreeUtil(root->right,root->val, maxi);
+        
     }
 };
