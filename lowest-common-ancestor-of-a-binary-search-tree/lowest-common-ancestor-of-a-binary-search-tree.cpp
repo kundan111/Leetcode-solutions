@@ -10,66 +10,59 @@
 
 class Solution {
 public:
-    
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         
-        vector <TreeNode*> v1;
-        vector <TreeNode*> v2;
+        vector<TreeNode*> res1;
+        vector<TreeNode*> res2;
         
-        pathFinder(root,p,v1);
-        pathFinder(root,q,v2);
+        pathFinder(root,p->val,res1);
+        pathFinder(root,q->val,res2);
         
-        int counter = 0;
-        
-        int sz1 = v1.size();
-        int sz2 = v2.size();
-        
-        // bool flag = true;
-        while(true)
+        /*
+        cout << "res1: " ;
+        for(int val : res1)
         {
-            if(counter < sz1 && counter < sz2)
-            {
-                if(v1[counter] == v2[counter])
-                {
-                    counter++;    
-                }else{
-                    // flag = false;
-                    break;
-                }
-            }else{
-                break;
-            }
+            cout << val << " ";
+        }
+        cout << endl;
+        cout << "res2: " ;
+        for(int val : res2)
+        {
+            cout << val << " ";
+        }
+        cout << endl;
+        
+        */
+        
+        TreeNode* ret = NULL;
+        
+        int i = 0;
+        while(i < res1.size() && i < res2.size() && res1[i] == res2[i])
+        {
+            ret = res1[i];
+            i++;
         }
         
-        return  v1[--counter];
         
-        
+        return ret;
         
     }
     
-    void pathFinder(TreeNode* root, TreeNode* t,vector <TreeNode*> &v )
+    void pathFinder(TreeNode* root, int target, vector<TreeNode*> &res)
     {
-        if(root)
+        if(root->val == target)
         {
-            if(root == t)
-            {
-                v.push_back(root);
-                return;
-            }
-            
-            v.push_back(root);
-            
-            if(root->val > t->val)
-            {
-                pathFinder(root->left,t,v);
-            }else{
-                pathFinder(root->right,t,v);
-            }
-            
-            
-            
+          res.push_back(root);
+          return;
+        }else if(root->val > target)
+        {
+            res.push_back(root);
+            pathFinder(root->left,target,res);
+        }else{
+            res.push_back(root);
+            pathFinder(root->right,target,res);
         }
-            
-        
     }
+    
+    
 };
