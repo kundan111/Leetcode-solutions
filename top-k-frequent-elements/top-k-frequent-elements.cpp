@@ -1,29 +1,43 @@
+class Compare
+{
+public:
+    bool operator() (vector<int> &a , vector<int> &b)
+    {
+        return a[1] < b[1];
+    }
+};
+
+
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         
-        vector<vector<int>> v;
+        
+        
         unordered_map<int,int>m;
         for(int val : nums)
         {
             m[val]++;
         }
-        
+        priority_queue<vector<int>, vector<vector<int>>, Compare > pq;
+       
         for(auto val : m)
         {
-            v.push_back({val.first,val.second});
+             
+            pq.push({val.first,val.second});
         }
         
-        sort(v.begin(),v.end(), [](auto a, auto b){
-            return a[1] > b[1];
-        });
+        
         
         vector<int> res;
         
         int i = 0;
         while(k--)
         {
-            res.push_back(v[i][0]);
+            auto _top = pq.top();
+            res.push_back(_top[0]);
+            pq.pop();
+            
             i++;
         }
         
