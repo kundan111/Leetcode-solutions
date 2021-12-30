@@ -5,7 +5,6 @@ class Node{
 public:
     Node()
     {
-        // next[26] = {NULL}; 
         isComplete = false;    
     }
 };
@@ -35,29 +34,17 @@ public:
             {
                 curItr->next[cur] = new Node;
             }
-//             if( i == sz-1)
-//             {
-                
-//                 curItr->isComplete = true;
-//             }
             curItr = curItr->next[cur];
             
             i++;
             
         }
         
-        // while(yo->)
-        
-        
         curItr->isComplete = true;
     }
     
     bool search(string word) {
         
-        
-        
-        
-     
         int i = 0;
         int sz = word.size();
         Node * curItr = dummyHolder;
