@@ -20,7 +20,7 @@ class Solution {
             }
         }
         
-        return pq.size() == 1 ? pq.poll() : 0;
+        return pq.size() == 1 ? pq.peek() : 0;
     }
 }
 
