@@ -34,16 +34,7 @@ class MyComp implements Comparator{
         int a = f.intValue();
         int b = s.intValue();
         
-        
-        if(a < b)
-        {
-            return 1;
-        }else if(a > b)
-        {
-            return -1;
-        }else{
-            return 0;
-        }
+        return b-a;
         
         
     }
