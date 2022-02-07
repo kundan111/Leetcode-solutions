@@ -4,11 +4,11 @@ class Solution {
         for(String s : strs)
         {
             String ori = s;
-            char[] charArr = ori.toCharArray();
-            Arrays.sort(charArr);
-            String key = String.valueOf(charArr);
+            // char[] charArr = ori.toCharArray();
+            // Arrays.sort(charArr);
+            // String key = String.valueOf(charArr);
             
-            // String key = cusSort(ori);
+            String key = cusSort(ori);
             if(!m.containsKey(key))
             {
                 m.put(key,new ArrayList<>());
@@ -21,7 +21,7 @@ class Solution {
         return new ArrayList<>(m.values());
     }
     
-    /*
+    
     static String cusSort(String ori)
     {
         char[] cArr = new char[26];
@@ -46,5 +46,5 @@ class Solution {
         
         return s.toString();
     }
-    */
+    
 }
