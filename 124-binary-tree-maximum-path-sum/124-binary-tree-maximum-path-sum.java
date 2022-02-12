@@ -14,47 +14,47 @@
  * }
  */
 class Solution {
+        int maxValue = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
      
-        int[] maxValue = new int[1];
-        maxValue[0] = Integer.MIN_VALUE;
-
-        maxPathSumUtil(root, maxValue);
+        maxPathSumUtil(root);
 
 
-        return maxValue[0];
+        return maxValue;
     }
 
-    public int maxPathSumUtil(TreeNode root, int[] maxValue)
+    public int maxPathSumUtil(TreeNode root)
     {
         if(root == null)
         {
             return 0;
         }
 
-        int leftHeight;
-        int rightHeight;
+        int leftSum;
+        int rightSum;
         
-        int l = maxPathSumUtil(root.left,maxValue);
-        int r = maxPathSumUtil(root.right,maxValue);
+        int l = maxPathSumUtil(root.left);
+        int r = maxPathSumUtil(root.right);
+        
         if( l < 0)
         {
-            leftHeight = 0;
+            leftSum = 0;
         }else{
-         leftHeight = l;
+            leftSum = l;
         }
         
         if( r < 0)
         {
-            rightHeight = 0;
+            rightSum = 0;
         }else{
-         rightHeight = r;
+            rightSum = r;
         }
         
+        // calculate the /-\ umbrella sum and update the result
+        maxValue = Math.max(maxValue, leftSum + rightSum + root.val);
         
-        maxValue[0] = Math.max(maxValue[0], leftHeight+rightHeight+root.val);
-        
-        return Math.max(leftHeight, rightHeight) + root.val;
+        // can take either take left branch or right branch sum including node value
+        return Math.max(leftSum, rightSum) + root.val;
         
     }
 }
