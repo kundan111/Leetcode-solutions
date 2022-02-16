@@ -130,7 +130,7 @@ class Node{
 class GfG
 {
     // return true/false denoting whether the tree is Symmetric or not
-        public static boolean isSymmetric(Node root)
+    public static boolean isSymmetric(Node root)
     {
         if(root == null)
         {
@@ -146,8 +146,16 @@ class GfG
             return true;
         }
 
+        /*
         if((root1 != null && root2 == null) || (root1 == null && root2 != null))
         {
+            return false;
+        }
+        */
+        // ALTERNATE WAY OF WRTING ABOVE CONDITION
+        if(root1 == null || root2 == null)
+        {
+            // will return false if both the nodes are not null
             return false;
         }
         
