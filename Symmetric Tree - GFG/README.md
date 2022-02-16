@@ -1,5 +1,5 @@
 # Symmetric Tree
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a Binary Tree. Check whether it&nbsp;is&nbsp;Symmetric&nbsp;or not, i.e. whether the binary tree is a&nbsp;<strong>Mirror image of itself</strong> or not.</span></p>
 
