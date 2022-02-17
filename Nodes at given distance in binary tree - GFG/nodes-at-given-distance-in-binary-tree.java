@@ -114,12 +114,7 @@ class Solution
         HashMap<Node,Node> mapper = new HashMap<>();
         parentMapper(root, mapper);
 
-        // GFGTree.printLine();
-        // for (Entry<Node,Node> e: mapper.entrySet()) {
-        //     System.out.println(e.getKey().data + " -> " + e.getValue().data);
-        // }
-        // GFGTree.printLine();
-
+        
         HashMap<Node,Integer> visited = new HashMap<>();
         ArrayList<Integer> res = new ArrayList<>();
         Queue<Node> q = new LinkedList<>();
