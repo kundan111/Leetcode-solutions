@@ -120,12 +120,12 @@ class Tree1
 	long res = 0;
     public long treePathsSum(Node root)
     {
-        String temp = "";
+        StringBuilder temp = new StringBuilder();
         treePathsSumUtil(root,temp);
             return res;
 	}
 
-    void treePathsSumUtil(Node root, String curSum)
+    void treePathsSumUtil(Node root, StringBuilder curSum)
     {
         if(root == null)
         {
@@ -134,12 +134,15 @@ class Tree1
 
         if(root.left == null && root.right == null)
         {
-            curSum += Integer.toString(root.data);
-            res += Integer.parseInt(curSum);
+            curSum.append(Integer.toString(root.data));
+            res += Integer.parseInt(curSum.toString());
             return;
         }
-        curSum += Integer.toString(root.data);
+        curSum = curSum.append(Integer.toString(root.data));
+        int len = curSum.length();
         treePathsSumUtil(root.left,curSum);
+        curSum.setLength(len);
         treePathsSumUtil(root.right, curSum);
+        curSum.setLength(len);
     }
 }
