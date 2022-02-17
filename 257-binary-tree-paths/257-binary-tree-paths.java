@@ -17,32 +17,35 @@ class Solution {
     List<String> v = new ArrayList();
     public List<String> binaryTreePaths(TreeNode root) {
         
-        // StringBuilder s = new StringBuilder();
-        String s ="";
+        StringBuilder s = new StringBuilder();
+        // String s ="";
         
         treePath(root,s);
         
         return v;
     }
-    void treePath(TreeNode root, String s)
+    void treePath(TreeNode root, StringBuilder s)
     {
         if(root.left ==null && root.right == null)
         {
-            s = s.concat(Integer.toString(root.val));
+            s = s.append(Integer.toString(root.val));
             v.add(s.toString());
             return;
         }
         
         
-        s = s.concat(Integer.toString(root.val));
-        s = s.concat("->");
+        s.append(Integer.toString(root.val));
+        s.append("->");
+        int sz = s.length();
         if(root.left != null)
         {
             treePath(root.left,s);
+            s.setLength(sz);
         }
         if(root.right != null)
         {
             treePath(root.right,s);
+            s.setLength(sz);
         }
         
         
