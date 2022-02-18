@@ -38,7 +38,8 @@ class Solution {
             counter++;    
         }
 
-
+        
+        pq.clear();
         
         return res;
     }
