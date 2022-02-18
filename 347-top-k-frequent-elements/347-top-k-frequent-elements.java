@@ -1,17 +1,7 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
 
-        Comparator<java.util.Map.Entry<Integer,Integer>> comp = new Comparator<java.util.Map.Entry<Integer,Integer>>() {
-
-            @Override
-            public int compare(java.util.Map.Entry<Integer, Integer> o1, java.util.Map.Entry<Integer, Integer> o2) {
-                
-                return -1*(o1.getValue() - o2.getValue());
-            }
-            
-        };
-     
-        PriorityQueue<java.util.Map.Entry<Integer,Integer>> pq = new PriorityQueue<>(comp);
+        PriorityQueue<java.util.Map.Entry<Integer,Integer>> pq = new PriorityQueue<>((a,b) -> -1*(a.getValue() - b.getValue()));
 
         HashMap<Integer,Integer> hm = new HashMap<>();
         
