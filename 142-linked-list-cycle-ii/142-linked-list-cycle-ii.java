@@ -12,27 +12,40 @@
 public class Solution {
     public ListNode detectCycle(ListNode head) {
                 
-        if(head == null)
-        {
-            return head;
-        }
+        
+        ListNode slow = head;
+        ListNode fast = head;
 
-        ListNode res = null;
-        ListNode temp = head;
+        boolean isLoopDetected = false;
+        
+        while (fast != null && fast.next != null) {
+            
+            slow = slow.next;
+            fast = fast.next.next;
 
-        HashMap<ListNode,Integer> hm = new HashMap<>();
-
-        while (temp != null) {
-            if(hm.containsKey(temp))
+            if(slow == fast)
             {
-                res = temp;
+                isLoopDetected = true;
                 break;
             }
-            hm.put(temp, 1);
-            temp = temp.next;
+
+        }
+        
+        if(!isLoopDetected)
+        {
+            return null;
 
         }
 
-        return res != null ? res : null;
+        // there is a loop 
+
+        ListNode entry = head;
+
+        while (entry != slow) {
+            entry = entry.next;
+            slow = slow.next;
+        }
+
+        return entry;
     }
 }
