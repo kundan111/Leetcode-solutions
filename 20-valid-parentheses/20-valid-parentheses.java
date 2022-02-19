@@ -1,5 +1,5 @@
 class Solution {
-    public boolean isValid(String s) {
+public boolean isValid(String s) {
         
         // odd length string can never be balanced
         if((s.length() & 1)  != 0)
@@ -14,9 +14,10 @@ class Solution {
 
         
         Stack<Character> st = new Stack<>();
+        int sz = s.length();
 
-        for (Character character : s.toCharArray()) {
-
+        for (int i = 0; i < sz; i++) {
+            char character = s.charAt(i);
             if(character == '(' || character == '{' || character == '[')
             {
                 st.push(character);
