@@ -15,7 +15,6 @@ class Solution {
             return;
         }
 
-        
         visited[i][j] = 1;
         if(image[i][j] == oldcolor)
         {
@@ -23,7 +22,7 @@ class Solution {
         }else{
             return;
         }
-        image[i][j] = newColor;
+        
         floodFillUtil(image, visited, i, j+1,oldcolor, newColor);
         floodFillUtil(image, visited, i, j-1,oldcolor, newColor);
         floodFillUtil(image, visited, i-1, j,oldcolor, newColor);
