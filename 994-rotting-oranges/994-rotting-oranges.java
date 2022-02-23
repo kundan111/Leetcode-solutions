@@ -1,6 +1,6 @@
 class Solution {
     public int orangesRotting(int[][] grid) {
-        class Pair{
+       class Pair{
             int i;
             int j;
 
@@ -13,7 +13,6 @@ class Solution {
             @Override
             public String toString() {
                 return "Pair [i=" + i + ", j=" + j + "]";
-                
             }
 
         }
@@ -37,6 +36,9 @@ class Solution {
         }
         
 
+        int[] dirX = {0,0,-1,1};
+        int[] dirY = {1,-1,0,0};
+
         int time = 0;
         while (!q.isEmpty()) {
             
@@ -47,27 +49,19 @@ class Solution {
                 int i = curCoor.i;
                 int j = curCoor.j;
 
-                if(isValid(grid, i, j+1, row, col))
-                {
-                    grid[i][j+1] = 2;
-                    q.add(new Pair(i, j+1));
-                }
-                if(isValid(grid, i, j-1, row, col))
-                {
-                    grid[i][j-1] = 2;
-                    q.add(new Pair(i, j-1));
-                }
-                if(isValid(grid, i-1, j, row, col))
-                {
-                    grid[i-1][j] = 2;
-                    q.add(new Pair(i-1, j));
-                }
-                if(isValid(grid, i+1, j, row, col))
-                {
-                    grid[i+1][j] = 2;
-                    q.add(new Pair(i+1, j));
-                }
 
+                for (int cur = 0; cur < 4; cur++) {
+                    int newX = i + dirX[cur];
+                    int newY = j + dirY[cur];
+
+                   
+                    if(isValid(grid, newX, newY, row, col))
+                    {
+                            grid[newX][newY] = 2;
+                            q.add(new Pair(newX,newY));    
+                    }
+                    
+                }
 
             }
             if(q.size() > 0)
@@ -76,7 +70,7 @@ class Solution {
             }
 
         }
-
+        
         int newInfected = 0;
         for (int i  = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -98,5 +92,4 @@ class Solution {
     boolean isValid(int[][] grid, int i, int j, int row, int col)
     {
         return ((i >= 0 && i < row) && (j >=0 && j < col) && grid[i][j] == 1);
-    }
-}
+    }}
