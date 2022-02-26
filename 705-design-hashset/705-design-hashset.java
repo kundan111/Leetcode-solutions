@@ -1,27 +1,28 @@
 public class MyHashSet {
-    private HashMap<Integer,Integer> hs;
+int[] hash = new int[1000001];
     public MyHashSet() {
-        hs = new HashMap<>();
-    }
-    
-    public void add(int key) {
-        if(!hs.containsKey(key))
-        {
-            hs.put(key, 1);
+        for (int i = 0; i < hash.length; i++) {
+            hash[i] = -1;
         }
     }
     
-    public void remove(int key) {
-        if(hs.containsKey(key))
+    public void add(int key) {
+        if(hash[key] == -1)
         {
-            hs.remove(key);
+            hash[key] = 1;
+        } 
+    }
+    
+    public void remove(int key) {
+        if(hash[key] != -1)
+        {
+            hash[key] = -1;
         }
     }
     
     public boolean contains(int key) {
         
-        return hs.containsKey(key);
-
+        return hash[key] != -1;
     }
 }
 
