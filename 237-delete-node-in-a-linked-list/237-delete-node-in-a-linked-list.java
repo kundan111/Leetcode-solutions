@@ -7,13 +7,19 @@
  * }
  */
 class Solution {
-    public void deleteNode(ListNode node) {
-        ListNode nextNode = node.next;
-        // swap the nextNode and node and values
-        int temp = node.val;
-        node.val = nextNode.val;
-        nextNode.val = temp;
-        node.next = nextNode.next;
+     public void deleteNode(ListNode node) {
         
+        // this is not null
+        ListNode nextNode = node.next;
+
+        // copy node to nextNode
+
+        int delValue = node.val;
+        node.val = nextNode.val;
+        nextNode.val = delValue;
+
+
+        node.next = node.next.next;
+
     }
 }
