@@ -28,11 +28,7 @@ class Solution {
         {
             return null;
         }
-
-        if(r < 0 || l < 0)
-        {
-            return null;
-        }
+        
 
         int mid = l + (r-l)/2;
         TreeNode newNode = new TreeNode(nums[mid]);
