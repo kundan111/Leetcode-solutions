@@ -17,7 +17,19 @@ class Solution {
             }
         }
         
-        return ans;
+        return isMajority(nums,ans) ? ans : -1;
         
+    }
+    boolean isMajority(int[] nums, int potentialAns)
+    {
+
+        int ans = 0;
+        for (int i : nums) {
+            if(i == potentialAns)
+            {
+                ans++;
+            }    
+        }
+        return ans > nums.length/2;
     }
 }
