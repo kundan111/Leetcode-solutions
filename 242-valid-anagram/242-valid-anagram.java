@@ -8,28 +8,20 @@ class Solution {
         {
             return false;
         }
-        HashMap<Character,Integer> hm = new HashMap<>();
+
+        int[] arr = new int[26];
 
         for (int i = 0; i < lengthOfS; i++) {
-            if(hm.containsKey(s.charAt(i)))
-            {
-                hm.put(s.charAt(i), hm.get(s.charAt(i)) +1 );
-            }else{
-                hm.put(s.charAt(i), 1);
-            }
+            arr[s.charAt(i) - 'a']++;
         }
 
-
         for (int i = 0; i < lengthOfT; i++) {
-            if(!hm.containsKey(t.charAt(i)))
+            if(arr[t.charAt(i) - 'a'] == 0)
             {
                 return false;
             }
-            hm.put(t.charAt(i), hm.get(t.charAt(i)) - 1);
-            if(hm.get(t.charAt(i)) == 0)
-            {
-                hm.remove(t.charAt(i));
-            }
+
+            arr[t.charAt(i) - 'a']--;
         }
         
 
