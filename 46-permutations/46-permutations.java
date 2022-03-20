@@ -7,7 +7,8 @@ class Solution {
         int r = nums.length;
 
         
-        generatePermutations(ans,nums, l, r);
+        
+        generatePermutations(ans,nums, l, r-1);
      
         return ans;
     }
@@ -21,7 +22,7 @@ class Solution {
             return;
         }
 
-        for (int i = l; i < r; i++) {
+        for (int i = l; i <= r; i++) {
             swap(nums, l, i);
             generatePermutations(ans,nums, l+1, r);
             swap(nums, l, i);
