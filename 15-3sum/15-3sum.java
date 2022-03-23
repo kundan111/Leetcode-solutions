@@ -19,14 +19,11 @@ class Solution {
                 int l = i+1;
                 int r = sz-1;
 
+                // System.out.println("target: " + target);
                 while (l < r) {
                     if(nums[l] + nums[r] == target)
                     {
-                        List<Integer> temp = new ArrayList<>();
-                        temp.add(nums[l]);
-                        temp.add(nums[r]);
-                        temp.add(nums[i]);
-                        res.add(temp);
+                        res.add(Arrays.asList(nums[l],nums[r],nums[i]));
                         
                         int tempLeft = nums[l];
                         int tempRight = nums[r];
@@ -47,6 +44,9 @@ class Solution {
             }
         }
 
-        return res;   
+        
+        
+        
+        return res;
     }
 }
