@@ -19,7 +19,6 @@ class Solution {
                 int l = i+1;
                 int r = sz-1;
 
-                // System.out.println("target: " + target);
                 while (l < r) {
                     if(nums[l] + nums[r] == target)
                     {
@@ -38,8 +37,6 @@ class Solution {
                             r--;
                         }
 
-                        // l++;
-                        // r--;
                     }else if(nums[l] + nums[r] > target)
                     {
                         r--;
