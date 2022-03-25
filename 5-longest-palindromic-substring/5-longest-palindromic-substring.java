@@ -1,23 +1,9 @@
 class Solution {
     public String longestPalindrome(String s) {
-        
-//         int[] units = new int[128];
-//         boolean isCharRepeting = false;
-        
+
         int sz = s.length();
 
-//         for (int i = 0; i < sz; i++) {
-//             if(units[(int)s.charAt(i)] > 0)
-//             {
-//                 isCharRepeting = true;
-//             }
-//             units[(int)s.charAt(i)]++;
-//         }
 
-//         if(!isCharRepeting)
-//         {
-//             return "" + s.charAt(0);
-//         }
 
         int maxPlindromeLen = 0;
         int start = -1;
@@ -26,17 +12,21 @@ class Solution {
         char[] charArray = s.toCharArray();
 
         for (int i = sz-1; i >= 0; i--) {
+            boolean flag = false;
             for (int j = 0; j < sz; j++) {
 
                 if(isPalindrome(charArray, j, i) && i-j + 1 > maxPlindromeLen)
                 {
-                    
                     start = j;
                     end = i;  
                     maxPlindromeLen = i-j + 1; 
+                    flag = true;
+                    break;
                 }
-                
-                
+                if(flag)
+                {
+                    break;
+                }
             }
         }
 
