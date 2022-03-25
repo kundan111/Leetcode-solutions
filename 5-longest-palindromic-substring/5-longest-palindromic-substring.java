@@ -16,7 +16,6 @@ class Solution {
         if(!isCharRepeting)
         {
             return "" + s.charAt(0);
-            
         }
 
 
@@ -52,9 +51,6 @@ class Solution {
             sb.append(s.charAt(i));
         }
         
-        
-        // System.out.println("start: " + start + "\n" + "end: " + end);
-
         return sb.toString();
     }
 
