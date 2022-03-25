@@ -1,60 +1,26 @@
 class Solution {
     public String longestPalindrome(String s) {
+        
 
-        int[] units = new int[128];
-        boolean isCharRepeting = false;
         int sz = s.length();
-
-        for (int i = 0; i < sz; i++) {
-            if(units[(int)s.charAt(i)] > 0)
-            {
-                isCharRepeting = true;
-            }
-            units[(int)s.charAt(i)]++;
-        }
-
-        if(!isCharRepeting)
-        {
-            return "" + s.charAt(0);
-        }
-
-
-
-        int maxPlindromeLen = 0;
-        int start = -1;
-        int end = -1;
-
         char[] charArray = s.toCharArray();
 
-        for (int i = sz-1; i >= 0; i--) {
-            boolean flag = false;
-            for (int j = 0; j < sz; j++) {
 
-                if(isPalindrome(charArray, j, i) && i-j + 1 > maxPlindromeLen)
-                {
-                    start = j;
-                    end = i;  
-                    maxPlindromeLen = i-j + 1; 
-                    flag = true;
-                    break;
+        for (int curLen = sz;  curLen >= 1; curLen--) {
+            int start = 0;
+            while (start + curLen - 1 < sz) {
+                if(isPalindrome(charArray, start, start+curLen-1)){
+                    return PalindromeBuilder(charArray, start, start+curLen-1);
                 }
-                if(flag)
-                {
-                    break;
-                }
+                start++;
+
             }
         }
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = start; i <= end; i++) {
-            sb.append(s.charAt(i));
-        }
-        
-        return sb.toString();
+  
+        return "";
     }
 
-    public boolean isPalindrome(char[] s, int start, int end)
+    boolean isPalindrome(char[] s, int start, int end)
     {
         while(start <= end)
         {
@@ -68,5 +34,14 @@ class Solution {
 
         return true;
     
+    }
+    String PalindromeBuilder(char[] s, int start, int end)
+    {
+        String ret = "";
+        for (int i = start; i <= end; i++) {
+            ret += s[i];
+        }
+
+        return ret;
     }
 }
