@@ -34,7 +34,6 @@ private ArrayList<Integer> al = new ArrayList<>();
             hm.put(key, al.size()-1);
             
             // swap 
-            
             al.set(indx, al.get(al.size()-1));
             al.set(al.size()-1,key);
 
@@ -43,7 +42,6 @@ private ArrayList<Integer> al = new ArrayList<>();
 
             
             // remove from hashmap
-            
             hm.remove(key);
             return true;
 
