@@ -13,7 +13,7 @@ class Solution {
 
         if(l1 == null || l2 == null)
         {
-            return l1 == null ? l1 : l2;
+            return l1 == null ? l2 : l1;
         }
         
         ListNode temp1 = l1;
