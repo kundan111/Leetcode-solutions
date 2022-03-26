@@ -1,47 +1,69 @@
 class Solution {
     public String longestPalindrome(String s) {
-        
+                int len = s.length();
 
-        int sz = s.length();
-        char[] charArray = s.toCharArray();
-
-
-        for (int curLen = sz;  curLen >= 1; curLen--) {
-            int start = 0;
-            while (start + curLen - 1 < sz) {
-                if(isPalindrome(charArray, start, start+curLen-1)){
-                    return PalindromeBuilder(charArray, start, start+curLen-1);
-                }
-                start++;
-
-            }
-        }
-  
-        return "";
-    }
-
-    boolean isPalindrome(char[] s, int start, int end)
-    {
-        while(start <= end)
+        if(len == 0)
         {
-            if(s[start] != s[end])
-            {
-                return false;
+            return "";
+        }
+
+        boolean[][] arr = new boolean[len][len];
+
+        int maxLen = 1;
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < len; i++) {
+            arr[i][i] = true;
+        }
+
+        for (int curLen = 1; curLen <= len; curLen++) {
+            for (int i = 0; i < len-1; i++) {
+                int x = i;
+                int y = i + curLen;
+
+                if(isWithin(x, y, len))
+                {
+
+                    if(s.charAt(x) != s.charAt(y))
+                    {
+                        arr[x][y] = false;
+                        continue;
+                    }
+
+                    int withinX = x + 1;
+                    int withinY = y - 1;
+
+                    
+                    
+                    if(withinY < withinX)
+                    {
+                        arr[x][y] = (s.charAt(x) == s.charAt(y));
+                        
+                    }else{
+                        arr[x][y] = (s.charAt(x) == s.charAt(y)) && arr[withinX][withinY];
+                    }
+                    if(arr[x][y] && y - x + 1 > maxLen )
+                        {
+                            start = x;
+                            end = y;
+                            maxLen = y-x+1;
+                        }
+                }
+
             }
-            start++;
-            end--;
         }
 
-        return true;
-    
-    }
-    String PalindromeBuilder(char[] s, int start, int end)
-    {
-        String ret = "";
+        StringBuilder sb = new StringBuilder();
+
         for (int i = start; i <= end; i++) {
-            ret += s[i];
+            sb.append(s.charAt(i));
         }
-
-        return ret;
+        
+        return sb.toString();
+    }
+    boolean isWithin(int x, int y, int sz)
+    {
+        return ((x >=0 && x < sz) && (y >=0 && y < sz));
     }
 }
