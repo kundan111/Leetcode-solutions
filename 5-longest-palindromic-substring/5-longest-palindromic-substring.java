@@ -34,8 +34,6 @@ class Solution {
                     int withinX = x + 1;
                     int withinY = y - 1;
 
-                    
-                    
                     if(withinY < withinX)
                     {
                         arr[x][y] = (s.charAt(x) == s.charAt(y));
@@ -44,11 +42,11 @@ class Solution {
                         arr[x][y] = (s.charAt(x) == s.charAt(y)) && arr[withinX][withinY];
                     }
                     if(arr[x][y] && y - x + 1 > maxLen )
-                        {
-                            start = x;
-                            end = y;
-                            maxLen = y-x+1;
-                        }
+                    {
+                        start = x;
+                        end = y;
+                        maxLen = y-x+1;
+                    }
                 }
 
             }
