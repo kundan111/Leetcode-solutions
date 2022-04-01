@@ -16,13 +16,11 @@ class Solution {
             {
                 mid++;
             }else{
-                swap(arr,mid,high);
-                high--;
+                swap(arr,mid,high--);
             }
         }
     }
     void swap(int[] arr, int i, int j)
-        
     {
         int temp = arr[i];
         arr[i] = arr[j];
