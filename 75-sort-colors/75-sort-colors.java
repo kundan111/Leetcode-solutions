@@ -10,9 +10,8 @@ class Solution {
         {
             if(arr[mid] == 0)
             {
-                swap(arr,low,mid);
-                low++;
-                mid++;
+                swap(arr,low++,mid++);
+                
             }else if(arr[mid] == 1)
             {
                 mid++;
@@ -23,6 +22,7 @@ class Solution {
         }
     }
     void swap(int[] arr, int i, int j)
+        
     {
         int temp = arr[i];
         arr[i] = arr[j];
