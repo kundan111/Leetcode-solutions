@@ -4,12 +4,14 @@ class Solution {
         int[] alpha = new int[26];
         int sz = s.length();
 
-        char[] charArray = s.toCharArray();
+        // char[] charArray = s.toCharArray();
 
+        // O(N)
         for (int i = 0; i < sz; i++) {
-            alpha[charArray[i]-'a']++;
+            alpha[s.charAt(i)-'a']++;
         }
 
+        // O(1)
         int oddCount = 0;
         for (int val : alpha) {
             if((val & 1) != 0)
@@ -29,10 +31,11 @@ class Solution {
         int i = 0;
         int j = sz-1;
 
+        // O(N)
         while (i <= j) {
-            if(charArray[i] != charArray[j])
+            if(s.charAt(i) != s.charAt(j))
             {
-                return isPalindrome(charArray, i, j-1) || isPalindrome(charArray, i+1, j);
+                return isPalindrome(s, i, j-1) || isPalindrome(s, i+1, j);
             }
             i++;
             j--;
@@ -42,12 +45,12 @@ class Solution {
         return true;
         
     }
-
-    boolean isPalindrome(char[] charArray, int l, int r)
+    
+    boolean isPalindrome(String s, int l, int r)
     {
         while(l <= r)
         {
-            if(charArray[l] != charArray[r])
+            if(s.charAt(l) != s.charAt(r))
             {
                 return false;
             }
