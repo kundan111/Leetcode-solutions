@@ -12,7 +12,6 @@ class Solution {
         {
             if(!checkRow(board,i))
             {
-                // System.out.println("yo1");
                 return false;
             }
         }
@@ -23,7 +22,6 @@ class Solution {
         {
             if(!checkCol(board,i))
             {
-                // System.out.println("yo2");
                 return false;
             }
         }
@@ -38,7 +36,6 @@ class Solution {
             {
                 if(!checkBox(board,allRows[i],allCols[j]))
                 {
-                    // System.out.println("yo3");
                     return false;
                 }
             }
@@ -49,7 +46,7 @@ class Solution {
 
     boolean checkRow(char[][] board, int rowNum)
     {
-        int[] nums = new int[26];
+        int[] nums = new int[10];
         for(int i = 0; i < col; i++)
         {
             if(board[rowNum][i] == '.')
@@ -68,7 +65,7 @@ class Solution {
 
     boolean checkCol(char[][] board, int colNum)
     {
-        int[] nums = new int[26];
+        int[] nums = new int[10];
         for(int i = 0; i < row; i++)
         {
             if(board[i][colNum] == '.')
@@ -84,10 +81,11 @@ class Solution {
         }
         return true;
     }
+    
 
     boolean checkBox(char[][] board, int rowNum, int colNum)
     {
-        int[] nums = new int[26];
+        int[] nums = new int[10];
         for(int i = rowNum; i < rowNum+3; i++)
         {
             for(int j = colNum; j < colNum+3; j++)
@@ -108,5 +106,4 @@ class Solution {
 
         return true;
     }
-    
 }
