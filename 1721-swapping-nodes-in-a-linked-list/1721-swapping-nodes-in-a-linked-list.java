@@ -10,50 +10,30 @@
  */
 class Solution {
     public ListNode swapNodes(ListNode head, int k) {
-        
-        
-        int totalLen = llLength(head);
-        int lengthFromFront  = totalLen - k;
-
-        int gotFromFront = lengthFromFront;
-
-        ListNode firstPoiter = head;
-        ListNode secondPoiter = head;
-
-        int count = 0;
-        while (count < k-1) {
-            firstPoiter = firstPoiter.next;
-            count++;
-        }
-
-        count = 0;
-        while (count < gotFromFront) {
-            secondPoiter = secondPoiter.next;
-            count++;
-        }
-
-
-        // swap these two nodes
-        int temp = firstPoiter.val;
-        firstPoiter.val = secondPoiter.val;
-        secondPoiter.val = temp;        
-
-
      
-        return head;
-    }
-    
+        int count = 0;
+        ListNode first = head;
 
-    int llLength(ListNode head)
-    {
-        int len = 0;
-        ListNode temp = head;
-
-        while (temp != null) {
-            len++;
-            temp = temp.next;
+        while (count < k-1) {
+            first = first.next;
+            count++;
         }
 
-        return len;
+        ListNode tempNode = first;
+
+        ListNode second = head;
+
+        while (first.next != null) {
+            first = first.next;
+            second = second.next;
+        }
+
+
+        int temp = tempNode.val;
+        tempNode.val = second.val;
+        second.val = temp;
+
+
+        return head;
     }
 }
