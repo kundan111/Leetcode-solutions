@@ -1,41 +1,29 @@
 class Solution {
-    public int lastStoneWeight(int[] stones) {
-        
-        
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(new MyComp());
-        
-        for(int stone : stones)
-        {
-            pq.add(stone);
+   public int lastStoneWeight(int[] stones) {
+     
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
+
+        for (Integer val : stones) {
+            pq.add(val);
         }
-        
-        while(pq.size() > 1)
-        {
-            int out1 = pq.poll();
-            int out2 = pq.poll();
-            
-            if(out1 != out2)
+
+        while (pq.size() > 1) {
+            int firstHeavy = pq.poll();
+            int secondHeavy = pq.poll();
+
+            if(firstHeavy != secondHeavy)
             {
-                pq.add(Math.abs(out1-out2));
+                pq.add(Math.abs(firstHeavy-secondHeavy));
             }
         }
-        
-        return pq.size() == 1 ? pq.peek() : 0;
-    }
-}
 
-class MyComp implements Comparator{
-    
-    public int compare(Object A,Object B)
-    {
-        Integer f = (Integer)A;
-        Integer s = (Integer)B;
-        
-        int a = f.intValue();
-        int b = s.intValue();
-        
-        return b-a;
+        if(pq.size() > 0)
+        {
+            return pq.poll();
+        }
+       
         
         
+        return 0;
     }
 }
