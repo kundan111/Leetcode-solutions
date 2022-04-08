@@ -19,18 +19,12 @@ class KthLargest {
             count++;
         }
 
-
-        
-
-
         // create a min heap of k largest elements
 
         while (!maxPq2.isEmpty()) {
             int cur = maxPq2.poll();
-            // System.out.print(cur + " ");
             minPq.add(cur);
         }
-        // System.out.println();
 
     }
     
