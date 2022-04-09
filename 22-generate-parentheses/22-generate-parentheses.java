@@ -1,71 +1,32 @@
 class Solution {
-    int totalParan;
     public List<String> generateParenthesis(int n) {
-        
-        totalParan = 2*n;
-        Set<String> res = new HashSet<>();
-
-        parenthesisRecur("(", ')', res);
-        parenthesisRecur("(", '(', res);
-     
-        return res.stream().collect(Collectors.toList());
+        int close = n;
+        int open = n-1;
+        List<String> result = new ArrayList<>();
+        collectBalancedParanthesis(result, open, close, "(");
+        return result;
     }
-
-
-    void parenthesisRecur(String currentStr, char currentChar, Set<String> res)
+    public void collectBalancedParanthesis(List<String> result, int open, int close, String cur)
     {
-        // base case
-        if(currentStr.length() == totalParan)
+        if(open == 0 && close == 0)
         {
-            if(isBalanced(currentStr))
-            {
-                res.add(currentStr);
-            }
-            return;
+            result.add(cur);
         }
-        
-        currentStr += currentChar;
 
-        parenthesisRecur(currentStr, ')', res);
-        parenthesisRecur(currentStr, '(', res);
-
-    }
-    
-
-    boolean isBalanced(String s)
-    {
-        
-        // odd length string can never be balanced
-        if((s.length() & 1)  != 0)
+        if(open > 0)
         {
-            return false;
+            String newStr = cur;
+            newStr += "(";
+            collectBalancedParanthesis(result, open-1, close, newStr);
         }
 
-        Map<Character,Character> mapper = new TreeMap<>();
-        mapper.put(')', '(');
+        if(close > open)
+        {
+            String newStr = cur;
+            newStr += ")";
+            collectBalancedParanthesis(result, open, close-1, newStr);
 
-        
-        Stack<Character> st = new Stack<>();
-        int sz = s.length();
-
-        for (int i = 0; i < sz; i++) {
-            char character = s.charAt(i);
-            if(character == '(')
-            {
-                st.push(character);
-            }else{
-                if(st.isEmpty())
-                {
-                    return false;
-                }
-                if(mapper.get(character) != st.pop())
-                {
-                    return false;
-                }
-            }
-            
         }
 
-        return st.size() == 0;
     }
 }
