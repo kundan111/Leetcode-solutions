@@ -15,15 +15,13 @@ class Solution {
 
         if(open > 0)
         {
-            // String newStr = cur;
-            // newStr += "(";
+            
             collectBalancedParanthesis(result, open-1, close, cur + "(");
         }
 
         if(close > open)
         {
-            // String newStr = cur;
-            // newStr += ")";
+            
             collectBalancedParanthesis(result, open, close-1, cur + ")");
 
         }
