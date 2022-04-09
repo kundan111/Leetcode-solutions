@@ -30,9 +30,8 @@ class Solution {
         parenthesisRecur(currentStr, '(', res);
 
     }
-
-
     
+
     boolean isBalanced(String s)
     {
         
@@ -51,7 +50,7 @@ class Solution {
 
         for (int i = 0; i < sz; i++) {
             char character = s.charAt(i);
-            if(character == '(' || character == '{' || character == '[')
+            if(character == '(')
             {
                 st.push(character);
             }else{
