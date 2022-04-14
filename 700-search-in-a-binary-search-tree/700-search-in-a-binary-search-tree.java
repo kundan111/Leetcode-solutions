@@ -12,13 +12,14 @@
  *         this.right = right;
  *     }
  * }
+ 
  */
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
-        return approach1(root, val);   
+        return approach2(root, val);
     }
     
-    public TreeNode approach1(TreeNode root, int val) {
+    public TreeNode approach2(TreeNode root, int val) {
         
         if(root == null)
         {
@@ -30,18 +31,22 @@ class Solution {
             return root;
         }
 
-        TreeNode left = approach1(root.left, val);
-
-        if(left != null)
+        if(root.val < val)
         {
-            return left;
+            TreeNode right = approach2(root.right, val);
+            if(right != null)
+            {
+                return right;
+            }
         }
 
-        TreeNode right = approach1(root.right, val);
-
-        if(right != null)
+        if(root.val > val)
         {
-            return right;
+            TreeNode left = approach2(root.left, val);
+            if(left != null)
+            {
+                return left;
+            }
         }
 
         return null;
