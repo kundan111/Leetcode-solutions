@@ -18,28 +18,22 @@ class Solution {
 
     public TreeNode increasingBST(TreeNode root) {
 
-        preorder(root);
-
-
-        // sort the list
-        Collections.sort(allNodes);
-
-
+        inorder(root);
         
         return rearrange(allNodes, 0);
     }
-    void preorder(TreeNode root)
+    void inorder(TreeNode root)
     {
         if(root == null)
         {
             return;
         }
-        
 
+        inorder(root.left);
         allNodes.add(root.val);
-        preorder(root.left);
-        preorder(root.right);
+        inorder(root.right);
     }
+    
 
     TreeNode rearrange(List<Integer> allNodes, int curIndex)
     {
