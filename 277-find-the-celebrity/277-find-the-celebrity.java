@@ -2,55 +2,41 @@
       boolean knows(int a, int b); */
 
 public class Solution extends Relation {
+    
+    int totalNumberofPeopleAtParty;
+    
     public int findCelebrity(int n) {
         return approach1(n);
-        
     }
-    
     
     public int approach1(int n) {
+
+        this.totalNumberofPeopleAtParty = n;
         
-        int celebrity = -1;
-        int maxCount = 0;
         for (int i = 0; i < n; i++) {
-            
-            int curCandidate = i;
-            int curCount = 0;
-            for (int j = 0; j < n; j++) {
-
-                if(j != curCandidate)
-                {
-                    if(knows(j, curCandidate))
-                    {
-                        curCount++;
-                        if(curCount > maxCount)
-                        {
-                            maxCount = curCount;
-                            celebrity = curCandidate;
-                        }
-                    }
-
-                }
+            if(isCelebrity(i))
+            {
+                return i;
             }
         }
+
+
         
-        return maxCount == n-1 ? (checkIfCelebrityKnowsAnyoneelse(celebrity, n) ? -1 : celebrity) : -1;
+        return -1;
     }
     
-    
-    boolean checkIfCelebrityKnowsAnyoneelse(int celebrity, int n)
+    boolean isCelebrity(int candidate)
     {
-        for (int i = 0; i < n; i++) {
-            if(celebrity != i)
+        for (int i = 0; i < totalNumberofPeopleAtParty; i++) {
+            if(i != candidate)
             {
-                if(knows(celebrity, i))
+                if(knows(candidate,i) || !knows(i, candidate))
                 {
-                    return true;
-                    
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 }
