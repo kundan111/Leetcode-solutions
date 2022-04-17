@@ -10,13 +10,18 @@ public class Solution extends Relation {
     }
     
     public int approach2(int n) {
-        
-        
         this.totalNumberofPeopleAtParty = n;
         
         int candidate = 0;
 
         for (int i = 0; i < n; i++) {
+            
+            if(candidate == i)
+            {
+                continue;
+                
+            }
+            
             if(knows(candidate, i))
             {
                 // candidate no longer remains the candidate for celebrity
