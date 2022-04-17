@@ -6,21 +6,28 @@ public class Solution extends Relation {
     int totalNumberofPeopleAtParty;
     
     public int findCelebrity(int n) {
-        return approach1(n);
+        return approach2(n);
     }
     
-    public int approach1(int n) {
-
+    public int approach2(int n) {
+        
+        
         this.totalNumberofPeopleAtParty = n;
         
+        int candidate = 0;
+
         for (int i = 0; i < n; i++) {
-            if(isCelebrity(i))
+            if(knows(candidate, i))
             {
-                return i;
+                // candidate no longer remains the candidate for celebrity
+                candidate = i;
             }
         }
-
-
+        
+        if(isCelebrity(candidate))
+        {
+            return candidate;
+        }
         
         return -1;
     }
