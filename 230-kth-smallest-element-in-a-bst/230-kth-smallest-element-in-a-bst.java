@@ -14,35 +14,32 @@
  * }
  */
 class Solution {
-    Integer res = -1;
-    int count = 0;
-        public int kthSmallest(TreeNode root, int k) {
+    int counter = 0;
+    int res = -1;
+    public int kthSmallest(TreeNode root, int k) {
         
-        
-        inOrder(root,k);
-        
-            
-        
+     
+        approach1(root, k);
+     
+     
         return res;
-        
     }
 
-    void inOrder(TreeNode root, int k )
-    {
+    public void approach1(TreeNode root, int k) {
+
         if(root == null)
         {
             return;
         }
-
-        inOrder(root.left, k);
-        count++;
-        
-        if(count == k)
+        approach1(root.left, k);
+        counter++;
+        if(counter == k && res == -1)
         {
             res = root.val;
             return;
         }
-        inOrder(root.right, k);
+        approach1(root.right, k);
 
     }
+    
 }
