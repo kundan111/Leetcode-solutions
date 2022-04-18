@@ -16,15 +16,12 @@
 class Solution {
     int counter = 0;
     int res = -1;
+    boolean flag = false;
     public int kthSmallest(TreeNode root, int k) {
-        
-     
         approach1(root, k);
-     
-     
         return res;
     }
-
+    
     public void approach1(TreeNode root, int k) {
 
         if(root == null)
@@ -33,13 +30,13 @@ class Solution {
         }
         approach1(root.left, k);
         counter++;
-        if(counter == k && res == -1)
+        if(counter == k && flag == false)
         {
             res = root.val;
+            flag = true;
             return;
         }
         approach1(root.right, k);
 
     }
-    
 }
