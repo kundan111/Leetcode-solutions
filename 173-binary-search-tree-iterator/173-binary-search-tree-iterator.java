@@ -15,42 +15,38 @@
  */
 class BSTIterator {
 
-    ArrayList<Integer> inorderAl = new ArrayList<>();
-    int i = -1;
-    int sz;
+    Stack<TreeNode> st = new Stack<>();
+    
     public BSTIterator(TreeNode root) {
-        inorder(root);
-        sz = inorderAl.size();
+        goLeft(root);
     }
     
     public int next() {
-        if(i+1 < sz)
-        {
-            i++;
-            return inorderAl.get(i);
-        }
+        
         // we should not hit this case
-        return -1;
+
+        TreeNode res = st.pop();
+
+        goLeft(res.right);
+
+        return res.val;
     }
     
     public boolean hasNext() {
+        return st.size() > 0;
         
-        return (i + 1) < sz;
     }
 
-    void inorder(TreeNode root)
+    void goLeft(TreeNode root)
     {
-        if(root == null)
-        {
-            return;
+        TreeNode cur = root;
+        while (cur != null) {
+            st.push(cur);
+            cur = cur.left;
         }
-        inorder(root.left);
-        inorderAl.add(root.val);
-        inorder(root.right);
+        
     }
-
 }
-
 
 /**
  * Your BSTIterator object will be instantiated and called as such:
