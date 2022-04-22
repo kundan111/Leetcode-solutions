@@ -7,7 +7,7 @@ class Solution {
     int[] dirX = {0,0,-1,1};
     int[] dirY = {1,-1,0,0};
 
-    int curCount = 0;
+    
 
     public int maxAreaOfIsland(int[][] grid) {
         int res = 0;
@@ -20,10 +20,10 @@ class Solution {
                 if(grid[i][j] == 1)
                 {
                     
-                    dfs(grid, i, j);
+                    //dfs(grid, i, j);
 
-                    res = Math.max(res, curCount);
-                    curCount = 0;
+                    res = Math.max(res, dfs(grid, i, j));
+                    //curCount = 0;
                 }
             }
         }
@@ -34,26 +34,29 @@ class Solution {
         return res;
     }
 
-    void dfs(int[][] grid, int i, int j)
+    int dfs(int[][] grid, int i, int j)
     {
         if(!isValid(grid, i, j))
         {
-            return;
+            return 0;
         }
 
         grid[i][j] = 3;
-        curCount++;
+        //curCount++;
+        
+        
+        return 1 + dfs(grid,i,j+1) + dfs(grid,i+1,j) + dfs(grid,i,j-1) + dfs(grid,i-1,j);
 
-        for (int k = 0; k < 4; k++) {
+//         for (int k = 0; k < 4; k++) {
             
-            int newX = i + dirX[k];
-            int newY = j + dirY[k];
+//             int newX = i + dirX[k];
+//             int newY = j + dirY[k];
 
-            if(isValid(grid, newX, newY))
-            {
-                    dfs(grid, newX, newY);
-            }
-        }
+//             if(isValid(grid, newX, newY))
+//             {
+//                     return 1 + dfs(grid, newX, newY);
+//             }
+//         }
         
     }
 
