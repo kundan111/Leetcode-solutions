@@ -19,11 +19,7 @@ class Solution {
             for (int j = 0; j < col; j++) {
                 if(grid[i][j] == 1)
                 {
-                    
-                    //dfs(grid, i, j);
-
                     res = Math.max(res, dfs(grid, i, j));
-                    //curCount = 0;
                 }
             }
         }
@@ -42,22 +38,8 @@ class Solution {
         }
 
         grid[i][j] = 3;
-        //curCount++;
-        
         
         return 1 + dfs(grid,i,j+1) + dfs(grid,i+1,j) + dfs(grid,i,j-1) + dfs(grid,i-1,j);
-
-//         for (int k = 0; k < 4; k++) {
-            
-//             int newX = i + dirX[k];
-//             int newY = j + dirY[k];
-
-//             if(isValid(grid, newX, newY))
-//             {
-//                     return 1 + dfs(grid, newX, newY);
-//             }
-//         }
-        
     }
 
     boolean isValid(int[][] grid, int i, int j)
