@@ -1,13 +1,11 @@
 class Codec {
 
-    HashMap<String,Integer> encode = new HashMap<>();
-    HashMap<Integer,String> decode = new HashMap<>();
+    HashMap<Integer,String> encode = new HashMap<>();
     private int counter = 0;
     // Encodes a URL to a shortened URL.
     public String encode(String longUrl) {
 
-        encode.put(longUrl, counter);
-        decode.put(counter, longUrl);
+        encode.put(counter, longUrl);
         int retVal = counter;
         counter++;
 
@@ -20,9 +18,10 @@ class Codec {
 
         int temp = Integer.parseInt(shortUrl);
 
-        return decode.get(temp);
+        return encode.get(temp);
         
     }
+    
 }
 
 // Your Codec object will be instantiated and called as such:
