@@ -1,27 +1,34 @@
-class Codec {
+public class Codec {
 
-    HashMap<Integer,String> encode = new HashMap<>();
-    private int counter = 0;
-    // Encodes a URL to a shortened URL.
+   static int N = 6;
+    String alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    String key = getRandomStringOfLengthN();
+    HashMap<String,String> hm = new HashMap<>();
+
+    String getRandomStringOfLengthN()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            sb.append(alphabet.charAt((int)(Math.random()*62)));
+        }
+
+        return sb.toString();
+    }
+    
+
     public String encode(String longUrl) {
-
-        encode.put(counter, longUrl);
-        int retVal = counter;
-        counter++;
-
-        return "" + retVal;
         
+        while (hm.containsKey(key)) {
+            key = getRandomStringOfLengthN();
+        }
+        hm.put(key, longUrl);
+        return "https://tiny.url/" + key;
     }
 
     // Decodes a shortened URL to its original URL.
     public String decode(String shortUrl) {
-
-        int temp = Integer.parseInt(shortUrl);
-
-        return encode.get(temp);
-        
+        return hm.get(shortUrl.replace("https://tiny.url/", ""));
     }
-    
 }
 
 // Your Codec object will be instantiated and called as such:
