@@ -50,12 +50,12 @@ class StartStationAndEndStationPair{
     
 }
 
-class AverageAndNumberOfObsPair{
+class AverageTimeAndNumberOfObsPair{
     
     double averageTime;
     int numberOfObs;
     
-    public AverageAndNumberOfObsPair(double averageTime, int numberOfObs) {
+    public AverageTimeAndNumberOfObsPair(double averageTime, int numberOfObs) {
         this.averageTime = averageTime;
         this.numberOfObs = numberOfObs;
     }
@@ -82,7 +82,7 @@ public class UndergroundSystem {
     
 
     private HashMap<Integer,StartStationAndStartTimepair> hm1 = new HashMap<>();
-    private HashMap<StartStationAndEndStationPair,AverageAndNumberOfObsPair> hm2 = new HashMap<>();
+    private HashMap<StartStationAndEndStationPair,AverageTimeAndNumberOfObsPair> hm2 = new HashMap<>();
 
     public UndergroundSystem() {
         
@@ -104,7 +104,7 @@ public class UndergroundSystem {
 
             if(hm2.containsKey(sp))
             {
-                AverageAndNumberOfObsPair averageAndNumberOfObsPair = hm2.get(sp);
+                AverageTimeAndNumberOfObsPair averageAndNumberOfObsPair = hm2.get(sp);
                 double oldAvg = averageAndNumberOfObsPair.averageTime;
                 int oldObs = averageAndNumberOfObsPair.numberOfObs;
                 double newAvg = ((oldAvg * oldObs) + timeTaken) / (oldObs + 1 );
@@ -113,7 +113,7 @@ public class UndergroundSystem {
                 averageAndNumberOfObsPair.setNumberOfObs(oldObs + 1);
             }else{
                 
-                hm2.put(sp, new AverageAndNumberOfObsPair((double)timeTaken, 1));
+                hm2.put(sp, new AverageTimeAndNumberOfObsPair((double)timeTaken, 1));
 
             }
 
@@ -128,8 +128,8 @@ public class UndergroundSystem {
         return hm2.get(startStationAndEndStationPair).averageTime;
 
     }
+    
 }
-
 
 /**
  * Your UndergroundSystem object will be instantiated and called as such:
