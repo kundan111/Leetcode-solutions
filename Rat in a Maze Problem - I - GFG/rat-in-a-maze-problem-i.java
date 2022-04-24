@@ -62,7 +62,7 @@ class Solution {
             return;
         }
 
-        // already visited return 
+        // valid cell
         if(!isValid(i, j, m))
         {
             return;
