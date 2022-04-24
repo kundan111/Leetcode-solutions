@@ -116,7 +116,9 @@ public class UndergroundSystem {
                 hm2.put(sp, new AverageTimeAndNumberOfObsPair((double)timeTaken, 1));
 
             }
-
+            
+            
+            hm1.remove(id);
 
         }
     }
