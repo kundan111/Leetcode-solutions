@@ -33,37 +33,36 @@ class Solution {
     boolean dfs(int[][] heights, int curX, int curY, int cur_diff, boolean[][] visited)
     {
 
-        // System.out.println("dfs(heights, " + curX + "," + curY + "," + cur_diff + ")");
-
         if(curX == row - 1 && curY == col - 1)
         {
             return true;
         }
-        int prevVal = heights[curX][curY];
+        int curVal = heights[curX][curY];
         visited[curX][curY] = true;
 
         boolean isPathPossible = false;
 
-        if(isWithin(curX, curY+1) && Math.abs(prevVal -  heights[curX][curY+1]) <= cur_diff && !visited[curX][curY+1])
+        if(isWithin(curX, curY+1) && Math.abs(curVal -  heights[curX][curY+1]) <= cur_diff && !visited[curX][curY+1])
         {
             isPathPossible = isPathPossible || dfs(heights, curX, curY+1, cur_diff,visited);
         }
 
-        if(isWithin(curX+1, curY) && Math.abs( prevVal -  heights[curX+1][curY] ) <= cur_diff && !visited[curX+1][curY])
+        if(isWithin(curX+1, curY) && Math.abs( curVal -  heights[curX+1][curY] ) <= cur_diff && !visited[curX+1][curY])
         {
             isPathPossible = isPathPossible || dfs(heights, curX+1, curY, cur_diff,visited);
         }
 
-        if(isWithin(curX, curY-1) && Math.abs( prevVal -  heights[curX][curY-1] ) <= cur_diff && !visited[curX][curY-1])
+        if(isWithin(curX, curY-1) && Math.abs( curVal -  heights[curX][curY-1] ) <= cur_diff && !visited[curX][curY-1])
         {
             isPathPossible = isPathPossible || dfs(heights, curX, curY-1, cur_diff,visited);
         }
 
-        if(isWithin(curX-1, curY) && Math.abs( prevVal -  heights[curX-1][curY] ) <= cur_diff && !visited[curX-1][curY])
+        if(isWithin(curX-1, curY) && Math.abs( curVal -  heights[curX-1][curY] ) <= cur_diff && !visited[curX-1][curY])
         {
             isPathPossible = isPathPossible || dfs(heights, curX-1, curY, cur_diff,visited);
         }
-        
+
+
 
         return isPathPossible;
 
