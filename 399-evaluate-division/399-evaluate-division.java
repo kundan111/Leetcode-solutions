@@ -21,39 +21,7 @@ class Solution {
         
         HashMap<String,List<FinalNodeAndWeightPair>> hm = new HashMap<>();
 
-        int curIndex = 0;
-        for (List<String> list : equations) {
-            String start = list.get(0);
-            String end = list.get(1);
-
-            
-            if(hm.containsKey(start))
-            {
-                List<FinalNodeAndWeightPair> val = hm.get(start);
-                val.add(new FinalNodeAndWeightPair(end, values[curIndex]));
-                hm.put(start, val);
-            }else{
-                
-                List<FinalNodeAndWeightPair> lst = new ArrayList<>();
-                lst.add(new FinalNodeAndWeightPair(end, values[curIndex]));
-                hm.put(start, lst);
-            }
-
-            if(hm.containsKey(end))
-            {
-                List<FinalNodeAndWeightPair> val = hm.get(end);
-                val.add(new FinalNodeAndWeightPair(start, 1/values[curIndex]));
-                hm.put(end, val);
-            }else{
-                
-                List<FinalNodeAndWeightPair> lst = new ArrayList<>();
-                lst.add(new FinalNodeAndWeightPair(start, 1/values[curIndex]));
-                hm.put(end, lst);
-            }
-
-            curIndex++;
-        }
-        
+        buildGraph(hm, equations, values);
 
 
 
@@ -117,5 +85,42 @@ class Solution {
 
         return ans;
 
+    }
+
+    void buildGraph(HashMap<String,List<FinalNodeAndWeightPair>> hm , List<List<String>> equations, double[] values)
+    {
+        int curIndex = 0;
+        for (List<String> list : equations) {
+            String start = list.get(0);
+            String end = list.get(1);
+
+            
+            if(hm.containsKey(start))
+            {
+                List<FinalNodeAndWeightPair> val = hm.get(start);
+                val.add(new FinalNodeAndWeightPair(end, values[curIndex]));
+                hm.put(start, val);
+            }else{
+                
+                List<FinalNodeAndWeightPair> lst = new ArrayList<>();
+                lst.add(new FinalNodeAndWeightPair(end, values[curIndex]));
+                hm.put(start, lst);
+            }
+
+            if(hm.containsKey(end))
+            {
+                List<FinalNodeAndWeightPair> val = hm.get(end);
+                val.add(new FinalNodeAndWeightPair(start, 1/values[curIndex]));
+                hm.put(end, val);
+            }else{
+                
+                List<FinalNodeAndWeightPair> lst = new ArrayList<>();
+                lst.add(new FinalNodeAndWeightPair(start, 1/values[curIndex]));
+                hm.put(end, lst);
+            }
+
+            curIndex++;
+        }
+        
     }
 }
