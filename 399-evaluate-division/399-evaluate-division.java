@@ -26,13 +26,11 @@ class Solution {
             String start = list.get(0);
             String end = list.get(1);
 
-            // a->b
-            // System.out.println("Adding start: " + start);
+            
             if(hm.containsKey(start))
             {
                 List<FinalNodeAndWeightPair> val = hm.get(start);
                 val.add(new FinalNodeAndWeightPair(end, values[curIndex]));
-                // System.out.println("val1: " + val);
                 hm.put(start, val);
             }else{
                 
@@ -41,14 +39,10 @@ class Solution {
                 hm.put(start, lst);
             }
 
-            //b->a
-
-            // System.out.println("Adding end: " + end);
             if(hm.containsKey(end))
             {
                 List<FinalNodeAndWeightPair> val = hm.get(end);
                 val.add(new FinalNodeAndWeightPair(start, 1/values[curIndex]));
-                // System.out.println("val2: " + val);
                 hm.put(end, val);
             }else{
                 
@@ -58,7 +52,6 @@ class Solution {
             }
 
             curIndex++;
-            // System.out.println(hm);
         }
         
 
@@ -91,7 +84,6 @@ class Solution {
                     ans = -1.0;
                 }
             }
-            // System.out.println("done");
             resIndex++;
         }
         
@@ -103,8 +95,6 @@ class Solution {
 
     boolean dfs(String startingNode, String endingNode, HashMap<String,List<FinalNodeAndWeightPair>> hm, double curProd, Set<String> visited)
     {
-        // System.out.println(visited);
-        // System.out.println("dfs(" + startingNode + "," + endingNode + "," + "hm," + curProd + ",visited" + ")");
         if(visited.contains(startingNode))
         {
             return false;
