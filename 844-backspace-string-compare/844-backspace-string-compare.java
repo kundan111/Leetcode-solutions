@@ -17,8 +17,12 @@ class Solution {
             if (i >= 0 && j >= 0 && S.charAt(i) != T.charAt(j))
                 return false;
 
-            if ((i >= 0) != (j >= 0))
+            
+            
+            if((i < 0 && j >= 0) || (j < 0 && i >= 0))
+            {
                 return false;
+            }
             i--; j--;
         }
         return true;
