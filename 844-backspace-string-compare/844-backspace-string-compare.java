@@ -1,47 +1,27 @@
 class Solution {
-    public boolean backspaceCompare(String s, String t) {
-        
-        Stack<Character> st1 = new Stack<>();
-        Stack<Character> st2 = new Stack<>();
+    public boolean backspaceCompare(String S, String T) {
+        int i = S.length() - 1, j = T.length() - 1;
+        int skipS = 0, skipT = 0;
 
-        sanitise(st1, s);
-        sanitise(st2, t);
-
-        if(st1.size() != st2.size())
-        {
-            return false;
-        }
-
-
-        while (st1.size() > 0) {
-            if(st1.pop() != st2.pop())
-            {
-                return false;
+        while (i >= 0 || j >= 0) { 
+            while (i >= 0) { 
+                if (S.charAt(i) == '#') {skipS++; i--;}
+                else if (skipS > 0) {skipS--; i--;}
+                else break;
             }
-        }
+            while (j >= 0) { 
+                if (T.charAt(j) == '#') {skipT++; j--;}
+                else if (skipT > 0) {skipT--; j--;}
+                else break;
+            }
+            if (i >= 0 && j >= 0 && S.charAt(i) != T.charAt(j))
+                return false;
 
+            if ((i >= 0) != (j >= 0))
+                return false;
+            i--; j--;
+        }
         return true;
     }
-
-    void sanitise(Stack<Character> st1, String s)
-    {
-        
-
-        for (int i = 0; i < s.length(); i++) {
-            
-            char curChar = s.charAt(i);
-            if(curChar != '#')
-            {
-                st1.push(curChar);
-            }else{
-                // backspace
-                if(st1.size() > 0)
-                {
-                    // atleast one element
-                    st1.pop();
-                }
-            }
-
-        }
-    }
+    
 }
