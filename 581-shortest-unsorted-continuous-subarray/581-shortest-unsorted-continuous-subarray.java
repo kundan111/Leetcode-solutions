@@ -1,42 +1,49 @@
 class Solution {
     public int findUnsortedSubarray(int[] nums) {
         
-        int[] original = Arrays.copyOf(nums, nums.length);
-        Arrays.sort(nums);
+        return approach2(nums);
 
-        int sz = nums.length;
+    }
+    
 
-        int i = 0;
-        int start = -1;
-        int end = -1;
-        while (i < sz) {
+    public int approach2(int[] nums) 
+    {
+        // use cooncept of next greater element to find the first out of order element
+        // from left side and first out of order element from right side and then take
+        // difference of their indexes
 
-            if(original[i] != nums[i])
-            {
-                start = i;
-                break;
-            }
-            i++;
-        }
-        if(start == -1)
-        {
+        Stack<Integer> st = new Stack<>();
+        int start = nums.length;
+        int end = 0;
+        for (int i = 0; i < nums.length; i++) {
             
+            int curEle = nums[i];
+            while (!st.empty() && nums[st.peek()] > curEle) {
+                start = Math.min(st.pop(), start);
+            }
+
+            st.push(i);
+        }
+
+        if(start == nums.length)
+        {
             return 0;
         }
 
-        i = sz-1;
+        st.clear();
 
-        while (i >= 0) {
-            if(original[i] != nums[i])
-            {
-                end = i;
-                break;
+        for (int i = nums.length-1; i >= 0; i--) {
+            
+            int curEle = nums[i];
+            while (!st.empty() && nums[st.peek()] < curEle) {
+                end = Math.max(st.pop(), end);
             }
-            i--;
+
+            st.push(i);
         }
 
-        return end -start +1 ;
-
         
+        return end - start + 1;
+
     }
 }
