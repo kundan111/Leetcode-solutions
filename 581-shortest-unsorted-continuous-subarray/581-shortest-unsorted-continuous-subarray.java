@@ -18,6 +18,11 @@ class Solution {
             }
             i++;
         }
+        if(start == -1)
+        {
+            
+            return 0;
+        }
 
         i = sz-1;
 
