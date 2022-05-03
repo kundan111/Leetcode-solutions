@@ -35,11 +35,6 @@ class Solution {
             i--;
         }
 
-        if(start == -1 || end == -1)
-        {
-            return 0;
-        }
-
         return end -start +1 ;
 
         
