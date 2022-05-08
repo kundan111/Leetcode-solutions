@@ -15,48 +15,51 @@
  *     public List<NestedInteger> getList();
  * }
  */
-public class NestedIterator implements Iterator<Integer> {
+class NestedIterator implements Iterator<Integer> {
 
-    List<Integer> res = new ArrayList<>();
-    int start = -1;
-
+    
+    Stack<NestedInteger> st = new Stack<>();
+    
     public NestedIterator(List<NestedInteger> nestedList) {
-
-        for (int i = 0; i < nestedList.size(); i++) {
-            dfs(nestedList.get(i), i);
+        
+        for (int i = nestedList.size()-1; i >= 0; i--) {
+            st.push(nestedList.get(i));
         }
         
     }
     
-
     @Override
     public boolean hasNext() {
-        return start+1 < res.size();
+        process();
+        return st.size() > 0;
     }
-
+    
     @Override
     public Integer next() {
 
-        return res.get(++start);
+        
+        return st.pop().getInteger();
     }
 
-    void dfs(NestedInteger nestedInteger, int curIndex)
+    
+
+    void process()
     {
-      // check if contain single integer or list of interger
-      if(nestedInteger.isInteger())
-      {
-          res.add(nestedInteger.getInteger());
-        //   System.out.println(nestedInteger.getInteger());
-          return;
-      }
 
-      List<NestedInteger> list = nestedInteger.getList();
-
-      for (int i = 0; i < list.size(); i++) {
-          dfs(list.get(i), i);
-      }
+        while (st.size() > 0 && !st.peek().isInteger()) {
+            List<NestedInteger> list = st.pop().getList();
+            for (int i = list.size()-1; i >= 0; i--) {
+                st.push(list.get(i));
+            }
+        }
 
     }
+
+
+    
+    
+    
+    
 }
 
 /**
