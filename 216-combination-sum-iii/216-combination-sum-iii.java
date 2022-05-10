@@ -1,52 +1,33 @@
 class Solution {
-    HashSet<List<Integer>> res = new HashSet<>();
-    HashSet<Integer> hs = new HashSet<>();
-    List<Integer> temp = new ArrayList<>();
-    int globalK;
-
     public List<List<Integer>> combinationSum3(int k, int n) {
-        this.globalK = k;
-        recur(n, k);
-        return new ArrayList<>(res);
+      List<List<Integer>> res = new ArrayList<>();
+        List out = new ArrayList<>();
+        back(res,out,k,n,1);
+        return res;
     }
-    
-    void recur(int remainingSum,int remainingK)
+    void back(List<List<Integer>> res,List<Integer> out,int currSize,int n,int limit)
     {
-        // System.out.println("recur(" + remainingSum + "," + remainingK + "," + temp + ");");
-        if(remainingSum < 0 || remainingK < 0)
+        if(out.size()==currSize && n ==0)
         {
-            return;
+            res.add(new ArrayList<>(out));
+            return ;
         }
-
-        if(remainingSum == 0 && remainingK == 0)
+        if(limit>9)
         {
-            List<Integer> al = new ArrayList<>(temp);
-            Collections.sort(al);
-            res.add(al);
-            return;
+            return ;
         }
-        if(remainingSum == 0 || remainingK == 0)
+            
+        if(out.size()>currSize)
         {
-            return;
+            return ;
         }
-        
-        if(temp.size() > globalK)
+        if(n<0)
         {
-            return;
+            return ;
         }
-
-        for (int curSum = 1; curSum <= 9; curSum++) {
-            if(remainingSum >= curSum && !hs.contains(curSum))
-            {
-                temp.add((Integer)curSum);
-                hs.add(curSum);
-                recur(remainingSum-curSum ,remainingK - 1);
-                hs.remove(curSum);
-                temp.remove((Integer)curSum);
-            }
-        }
-        
-        
-
+        out.add(limit);
+        back(res,out,currSize,n-limit,limit+1);
+        out.remove(out.size()-1);
+        back(res,out,currSize,n,limit+1);
     }
 }
