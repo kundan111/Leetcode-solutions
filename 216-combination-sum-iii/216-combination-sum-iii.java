@@ -2,9 +2,10 @@ class Solution {
     HashSet<List<Integer>> res = new HashSet<>();
     HashSet<Integer> hs = new HashSet<>();
     List<Integer> temp = new ArrayList<>();
+    int globalK;
 
     public List<List<Integer>> combinationSum3(int k, int n) {
-        
+        this.globalK = k;
         recur(n, k);
         return new ArrayList<>(res);
     }
@@ -28,6 +29,11 @@ class Solution {
         {
             return;
         }
+        
+        if(temp.size() > globalK)
+        {
+            return;
+        }
 
         for (int curSum = 1; curSum <= 9; curSum++) {
             if(remainingSum >= curSum && !hs.contains(curSum))
@@ -39,6 +45,7 @@ class Solution {
                 temp.remove((Integer)curSum);
             }
         }
+        
         
 
     }
