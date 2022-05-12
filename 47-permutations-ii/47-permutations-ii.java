@@ -8,13 +8,12 @@ class Solution {
         
         this.numsLen = nums.length;
         boolean[] visited = new boolean[nums.length];
-        generatePermutation(nums, 0,visited);
+        generatePermutation(nums,visited);
         
         return res;
     }
-    
 
-    void generatePermutation(int[] nums, int curIndex, boolean[] visited)
+    void generatePermutation(int[] nums, boolean[] visited)
     {
         if(resultHolder.size() == numsLen)
         {
@@ -26,6 +25,7 @@ class Solution {
             }
             return;
         }
+        
 
         for (int i = 0; i < numsLen; i++) {
 
@@ -33,7 +33,7 @@ class Solution {
             {
                 visited[i] = true;
                 resultHolder.add(nums[i]);
-                generatePermutation(nums, i, visited);
+                generatePermutation(nums, visited);
                 resultHolder.remove(resultHolder.size()-1);
                 visited[i] = false;
 
