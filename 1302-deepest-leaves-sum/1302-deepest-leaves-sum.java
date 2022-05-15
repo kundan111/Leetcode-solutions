@@ -22,9 +22,10 @@ class Solution {
     public int deepestLeavesSum(TreeNode root) {
         // int sumAtMaxLevel = 0;
         int curLevel = 0;
-        sumAtLevel(root, curLevel);
+        return sumAtLevel(root, curLevel);
         
-        return sumAtMaxLevel;
+        
+         
     }
 
     int sumAtLevel(TreeNode curNode,  int curLevel)
