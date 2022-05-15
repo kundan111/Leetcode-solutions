@@ -20,29 +20,28 @@ class Solution {
 
     
     public int deepestLeavesSum(TreeNode root) {
-        // int sumAtMaxLevel = 0;
         int curLevel = 0;
         return sumAtLevel(root, curLevel);
-        
-        
-         
     }
 
     int sumAtLevel(TreeNode curNode,  int curLevel)
     {
-        // System.out.println("sumAtLevel(" + (curNode == null ? "null" : curNode.val) +","+ curLevel + ")");
         if(curNode == null)
         {
             return 0;
         }
 
-        if(curLevel > maxLevelFound)
+        if(curNode.left == null && curNode.right == null)
         {
-            maxLevelFound = curLevel;
-            sumAtMaxLevel = curNode.val;
-        }else if(curLevel == maxLevelFound)
-        {
-            sumAtMaxLevel += curNode.val;
+            if(curLevel > maxLevelFound)
+            {
+                maxLevelFound = curLevel;
+                sumAtMaxLevel = curNode.val;
+            }else if(curLevel == maxLevelFound)
+            {
+                sumAtMaxLevel += curNode.val;
+            }
+
         }
 
         sumAtLevel(curNode.left, curLevel+1);
@@ -50,6 +49,7 @@ class Solution {
 
 
         return sumAtMaxLevel;
+        
         
     }
 }
