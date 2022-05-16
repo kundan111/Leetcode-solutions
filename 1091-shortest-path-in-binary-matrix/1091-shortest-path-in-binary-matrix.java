@@ -25,7 +25,7 @@ class Solution {
     public int shortestPathBinaryMatrix(int[][] grid) {
         edgeLen = grid.length;
         int temp = bfs(grid);
-        return temp != -1 ? temp+1 : -1;
+        return temp != -1 ? temp : -1;
         
     }
 
@@ -43,11 +43,12 @@ class Solution {
         {
             return -1;
         }
+        
 
         Queue<Coordinate> q = new LinkedList<>();
         q.add(new Coordinate(0, 0));
         grid[0][0] = 1;
-        int curDist = 0;
+        int curDist = 1;
         while (!q.isEmpty()) {
             
             int sz = q.size();
