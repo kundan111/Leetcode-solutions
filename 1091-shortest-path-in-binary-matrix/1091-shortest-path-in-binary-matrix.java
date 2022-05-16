@@ -21,7 +21,6 @@ class Solution {
     int[] offSetX = {-1,-1,1,1,-1,1,0,0};
     int[] offSetY = {-1,1,-1,1,0,0,-1,1};
 
-    int ans = Integer.MAX_VALUE;
 
     public int shortestPathBinaryMatrix(int[][] grid) {
         edgeLen = grid.length;
@@ -47,20 +46,18 @@ class Solution {
 
         Queue<Coordinate> q = new LinkedList<>();
         q.add(new Coordinate(0, 0));
-        grid[0][0] = 2;
+        grid[0][0] = 1;
         int curDist = 0;
         while (!q.isEmpty()) {
             
             int sz = q.size();
             
-
             while (sz-- > 0) {
 
                 Coordinate curCoordinate = q.poll();
                 if(curCoordinate.x == edgeLen-1 && curCoordinate.y == edgeLen-1)
                 {
                     return curDist;
-                    
                 }
 
                 for (int i = 0; i < 8; i++) {
@@ -69,20 +66,17 @@ class Solution {
 
                     if(isValid(grid, nextX ,nextY))
                     {
-                        grid[nextX][nextY] = 2;
+                        grid[nextX][nextY] = 1;
                         q.add(new Coordinate(nextX, nextY));
                     }
                 }
 
             }
             curDist++;
-
-            
-
         }        
 
         return -1;
-
+        
     }
 
     
