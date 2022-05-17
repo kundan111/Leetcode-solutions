@@ -11,39 +11,31 @@
 class Solution {
     public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
         
-        TreeNode originalRootCopy = original;
-        TreeNode cloneRootCopy = cloned;
-
-        return traverse(originalRootCopy, cloneRootCopy, target);
-    }
-
-    TreeNode traverse(TreeNode original, TreeNode clone, TreeNode target)
-    {
-        
-        if(original == null)
+         if(original == null)
         {
             return null;
         }
 
         if(original == target)
         {
-            return clone;
+            return cloned;
         }
 
-        TreeNode l = traverse(original.left, clone.left, target);
+        TreeNode l = getTargetCopy(original.left, cloned.left, target);
         if(l != null)
         {
             return l;
         }
 
-        TreeNode r = traverse(original.right, clone.right, target);
+        TreeNode r = getTargetCopy(original.right, cloned.right, target);
         if(r != null)
         {
             return r;
         }
 
         
-        
         return null;
     }
+
+    
 }
