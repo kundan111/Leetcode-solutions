@@ -1,8 +1,8 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         
-        int[] alpha = new int[256];
-
+        int[] alpha = new int[128];
+        
         int l = 0;
         int r = 0;
 
