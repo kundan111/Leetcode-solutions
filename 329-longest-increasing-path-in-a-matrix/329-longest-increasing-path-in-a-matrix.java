@@ -5,7 +5,6 @@ class Solution {
     int[] dirX = {0,0,-1,1};
     int[] dirY = {1,-1,0,0};
 
-    boolean[][] visited;
     int[][] maxMatrix;
     int ans = 0;
 
@@ -33,8 +32,7 @@ class Solution {
 
         return ans;
     }
-
-
+    
     int dfs(int[][] matrix, int i, int j, int prevVal)
     {
 
@@ -73,7 +71,7 @@ class Solution {
         return ((i >= 0 && i < row) && (j >=0 && j < col));
     }
 
-    void printMaxMatrix(int[][] arr)
+    void printMatrix(int[][] arr)
     {
         int row = arr.length;
         int col = arr[0].length;
