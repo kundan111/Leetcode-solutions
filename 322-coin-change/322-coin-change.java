@@ -1,7 +1,12 @@
 class Solution {
-    HashMap<Long,Long> dp = new HashMap<>();
+    long[] dp;
 
     public int coinChange(int[] coins, int amount) {
+
+        dp = new long[amount+5];
+
+        Arrays.fill(dp, -1);
+
         long temp = recur(coins, amount) ;
         // System.out.println("temp: " + temp);
         return temp == Integer.MAX_VALUE ? -1 : (int)temp;
@@ -10,6 +15,7 @@ class Solution {
 
     Long recur(int[] coins, long amount)
     {
+        
         // System.out.println("recur(coins," +  amount + ")");
         if(amount < 0)
         {
@@ -21,9 +27,9 @@ class Solution {
             return 0L;
         }
 
-        if(dp.containsKey(amount))
+        if(dp[(int)amount] != -1)
         {
-            return dp.get(amount);
+            return dp[(int)amount];
         }
 
         Long coinsMin = (long)Integer.MAX_VALUE;
@@ -31,11 +37,9 @@ class Solution {
         for (int i = 0; i < coins.length; i++) {
             coinsMin = Math.min(coinsMin, 1 + recur(coins, amount - coins[i]));
         }
+
         
-        
-        // System.out.println("coinsMin: " + coinsMin);
-        // System.out.println("------------------");
-        dp.put(amount, coinsMin);
+        dp[(int)amount] = coinsMin;
         return coinsMin;
 
     }
