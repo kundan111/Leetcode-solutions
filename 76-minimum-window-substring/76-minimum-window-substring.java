@@ -2,9 +2,7 @@ class Solution {
     public String minWindow(String s, String t) {
         
         HashMap<Character, Integer> freqMap = buildFreqMap(t);
-        // List<Integer> charIndexList = buildCharIndex(freqMap, s);
-
-        // return sol1(s, charIndexList, freqMap,t);
+        
 
         return sol2(freqMap, s, t.length());
     }
@@ -46,21 +44,16 @@ class Solution {
 
                     right++;
                 }
-            }
-
-            
-            
-
-            if(curMatchCount == matchCount)
-            {
-                if(right - left + 1 < ans)
-                {
-                    ans = right - left + 1;
-                    finalLeft = left;
-                    finalRight = right;
-                }
-                // System.out.println("intermediate1: "  + s.substring(finalLeft, finalRight+1));
                 
+                 if(curMatchCount == matchCount)
+                {
+                    if(right - left + 1 < ans)
+                    {
+                        ans = right - left + 1;
+                        finalLeft = left;
+                        finalRight = right;
+                    }
+                }
             }
 
             // release
@@ -72,7 +65,6 @@ class Solution {
                     ans = right - left + 1;
                     finalLeft = left;
                     finalRight = right;
-                    // System.out.println("intermediate2: "  + s.substring(finalLeft, finalRight+1));
                 }
 
                 char curChar = s.charAt(left);
@@ -106,13 +98,6 @@ class Solution {
         
         return s.substring(finalLeft , finalRight+1);
     }
-
-
-
-
-
-
-
     HashMap<Character, Integer> buildFreqMap(String t)
     {
         HashMap<Character, Integer> freqMap = new HashMap<>();
@@ -126,98 +111,5 @@ class Solution {
     }
 
 
-    List<Integer> buildCharIndex(HashMap<Character, Integer> freqMap, String s)
-    {
-        List<Integer> res = new ArrayList<>();
-
-        for (int i = 0; i < s.length(); i++) {
-            if(freqMap.containsKey(s.charAt(i)))
-            {
-                res.add(i);
-            }
-        }
-
-        return res;
-    }
-
-
-    String sol1(String s, List<Integer> charIndexList, HashMap<Character, Integer> freqMap, String t)
-    {
-
-        int sz = charIndexList.size();
-        int start = -1;
-        int end = -1;
-        HashMap<Character, Integer> original = new HashMap<>(freqMap);
-        int i = 0;
-        int minLen = Integer.MAX_VALUE;
-        int finalStart = -1;
-        int finalEnd = -1;
-        while(i < sz)
-        {
-            
-            start = charIndexList.get(i);
-            int k = i;
-
-            
-            
-            while (k < sz && freqMap.size() > 0) {
-                char curChar = s.charAt(charIndexList.get(k));
-                if(freqMap.containsKey(curChar))
-                {
-                    deleteFromHash(freqMap, curChar);   
-                }
-                if(freqMap.size() == 0)
-                {
-                    end = charIndexList.get(k);  
-                    // System.out.println("intermediate: " + s.substring(start, end+1));
-                    if((end - start + 1) < minLen) 
-                    {
-                        finalStart = start;
-                        finalEnd = end;
-                        minLen = (end - start + 1);
-
-                        if(minLen == t.length())
-                        {
-                            return s.substring(finalStart , finalEnd+1);
-                        }
-                    }
-                }
-                k++;
-            }
-
-            freqMap = new HashMap<>(original);
-
-            i++;
-
-            
-
-        }
-
-
-        if(finalEnd == -1 || finalStart == -1)
-        {
-            return "";
-        }
-
-        return s.substring(finalStart , finalEnd+1);
-        
-    }
     
-    void deleteFromHash(HashMap<Character, Integer> hash, char key)
-    {
-        if(!hash.containsKey(key))
-        {
-            return;
-        }
-
-        int newVal = hash.get(key) - 1;
-
-        if(newVal == 0)
-        {
-            hash.remove(key);
-            return;
-        }
-
-        hash.put(key, newVal);
-    }
 }
