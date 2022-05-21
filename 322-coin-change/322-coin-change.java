@@ -8,7 +8,6 @@ class Solution {
         Arrays.fill(dp, -1);
 
         long temp = recur(coins, amount) ;
-        // System.out.println("temp: " + temp);
         return temp == Integer.MAX_VALUE ? -1 : (int)temp;
     }
 
@@ -16,7 +15,6 @@ class Solution {
     Long recur(int[] coins, long amount)
     {
         
-        // System.out.println("recur(coins," +  amount + ")");
         if(amount < 0)
         {
             return (long) Integer.MAX_VALUE;
