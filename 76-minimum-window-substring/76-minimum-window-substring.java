@@ -52,11 +52,17 @@ class Solution {
                         ans = right - left + 1;
                         finalLeft = left;
                         finalRight = right;
+                        
+                        if(ans == matchCount)
+                        {
+                            return s.substring(finalLeft , finalRight+1);
+                        }
                     }
                 }
             }
 
             // release
+            
 
             while (right < sz && left < sz && curMatchCount == matchCount) {
                 
@@ -65,6 +71,11 @@ class Solution {
                     ans = right - left + 1;
                     finalLeft = left;
                     finalRight = right;
+                    
+                    if(ans == matchCount)
+                    {
+                        return s.substring(finalLeft , finalRight+1);
+                    }
                 }
 
                 char curChar = s.charAt(left);
@@ -78,10 +89,9 @@ class Solution {
                     {
                         curMatchCount--;
                     }
-                    left++;
-                }else{
-                    left++;
                 }
+                
+                left++;
                 
             }
             right++;
