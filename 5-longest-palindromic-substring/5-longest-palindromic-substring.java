@@ -1,68 +1,51 @@
 class Solution {
+    int sz;
+    int ans = Integer.MIN_VALUE;
+    int finalLeft = 0;
+    int finalRight = 0;
+
     public String longestPalindrome(String s) {
-                int len = s.length();
+        this.sz = s.length();
 
-        if(len == 0)
-        {
-            return "";
+        for (int i = 0; i < sz; i++) {
+            countPalindromes(s, i, i);
         }
 
-        boolean[][] arr = new boolean[len][len];
-
-        int maxLen = 1;
-        int start = 0;
-        int end = 0;
-
-        for (int i = 0; i < len; i++) {
-            arr[i][i] = true;
+        for (int i = 0; i < sz; i++) {
+            countPalindromes(s, i, i+1);
         }
 
-        for (int curLen = 1; curLen <= len; curLen++) {
-            for (int i = 0; i < len-1; i++) {
-                
-                int x = i;
-                int y = i + curLen;
 
-                if(isWithin(x, y, len))
+        return s.substring(finalLeft, finalRight+1);
+    }
+
+    boolean isWithin(int l ,int r)
+    {
+        return (l >=0 && r < sz);
+    }
+
+    void countPalindromes(String s, int l, int r)
+    {
+        while (isWithin(l, r)) {
+            if(s.charAt(l) == s.charAt(r))
+            {
+                if(r-l + 1 > ans)
                 {
-
-                    if(s.charAt(x) != s.charAt(y))
-                    {
-                        arr[x][y] = false;
-                        continue;
-                    }
-
-                    int withinX = x + 1;
-                    int withinY = y - 1;
-
-                    if(withinY < withinX)
-                    {
-                        arr[x][y] = (s.charAt(x) == s.charAt(y));
-                        
-                    }else{
-                        arr[x][y] = (s.charAt(x) == s.charAt(y)) && arr[withinX][withinY];
-                    }
-                    if(arr[x][y] && y - x + 1 > maxLen )
-                    {
-                        start = x;
-                        end = y;
-                        maxLen = y-x+1;
-                    }
+                    ans = r-l+1;
+                    finalLeft = l;
+                    finalRight = r;
                 }
+                l--;
+                r++;
 
+
+            }else{
+                break;
             }
         }
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = start; i <= end; i++) {
-            sb.append(s.charAt(i));
-        }
         
-        return sb.toString();
-    }
-    boolean isWithin(int x, int y, int sz)
-    {
-        return ((x >=0 && x < sz) && (y >=0 && y < sz));
+        return;
+        
+        
     }
 }
