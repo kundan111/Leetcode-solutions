@@ -19,6 +19,7 @@ class Solution {
 
         for (int curLen = 1; curLen <= len; curLen++) {
             for (int i = 0; i < len-1; i++) {
+                
                 int x = i;
                 int y = i + curLen;
 
