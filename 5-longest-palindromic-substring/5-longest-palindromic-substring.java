@@ -1,9 +1,10 @@
 class Solution {
     int sz;
-    int ans = Integer.MIN_VALUE;
+    int ans = 1;
     int finalLeft = 0;
     int finalRight = 0;
-
+    
+    
     public String longestPalindrome(String s) {
         this.sz = s.length();
 
