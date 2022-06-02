@@ -15,6 +15,7 @@ class Solution {
 
         return res;
     }
+    
 
     void transposeUtilUpdateCol(int[][] ori, int[][] res, int colNumber)
     {
